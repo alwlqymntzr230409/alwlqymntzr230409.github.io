@@ -3,740 +3,202 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sufi GAMES - لوحة التحكم</title>
+<title>Sufi GAMES</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/cairo@5.0.0/index.min.css">
 <style>
-  /* ===== BASE STYLES ===== */
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Cairo', sans-serif;
-  }
-
-  body {
-    background: #0a0a15;
-    color: #fff;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
+  body { background: #0a0a15; color: #fff; min-height: 100vh; overflow-x: hidden; }
   body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-      radial-gradient(circle at 20% 30%, rgba(138, 43, 226, 0.15) 0%, transparent 50%),
-      radial-gradient(circle at 80% 70%, rgba(0, 150, 255, 0.15) 0%, transparent 50%),
-      radial-gradient(circle at 50% 100%, rgba(255, 0, 150, 0.1) 0%, transparent 50%);
-    z-index: -1;
-    animation: bgMove 15s ease-in-out infinite;
+    content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at 20% 30%, rgba(138, 43, 226, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(0, 150, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 50% 100%, rgba(255, 0, 150, 0.1) 0%, transparent 50%);
+    z-index: -1; animation: bgMove 15s ease-in-out infinite;
   }
+  @keyframes bgMove { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
 
-  @keyframes bgMove {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-  }
-
-  /* ===== HEADER ===== */
   header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(10, 10, 21, 0.85);
-    backdrop-filter: blur(20px);
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10, 10, 21, 0.85); backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(138, 43, 226, 0.3);
-    padding: 15px 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
+    padding: 15px 5%; display: flex; justify-content: space-between;
+    align-items: center; gap: 15px;
   }
-
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 28px;
-    font-weight: 900;
-    letter-spacing: 1px;
-    cursor: pointer;
-  }
-
+  .logo { display: flex; align-items: center; gap: 12px; font-size: 28px; font-weight: 900; cursor: pointer; }
   .logo-icon {
-    width: 45px;
-    height: 45px;
-    background: linear-gradient(135deg, #8a2be2, #00b4ff);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
-    animation: pulse 2s ease-in-out infinite;
+    width: 45px; height: 45px; background: linear-gradient(135deg, #8a2be2, #00b4ff);
+    border-radius: 12px; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 20px rgba(138, 43, 226, 0.5); animation: pulse 2s ease-in-out infinite;
   }
+  @keyframes pulse { 0%, 100% { box-shadow: 0 0 20px rgba(138, 43, 226, 0.5); } 50% { box-shadow: 0 0 35px rgba(138, 43, 226, 0.8); } }
+  .logo-icon svg { width: 28px; height: 28px; fill: white; }
+  .logo-text { background: linear-gradient(135deg, #fff, #00b4ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .logo-text span { background: linear-gradient(135deg, #8a2be2, #ff00aa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-  @keyframes pulse {
-    0%, 100% { box-shadow: 0 0 20px rgba(138, 43, 226, 0.5); }
-    50% { box-shadow: 0 0 35px rgba(138, 43, 226, 0.8); }
-  }
-
-  .logo-icon svg {
-    width: 28px;
-    height: 28px;
-    fill: white;
-  }
-
-  .logo-text {
-    background: linear-gradient(135deg, #fff, #00b4ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .logo-text span {
-    background: linear-gradient(135deg, #8a2be2, #ff00aa);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  nav ul {
-    display: flex;
-    gap: 30px;
-    list-style: none;
-    align-items: center;
-  }
-
-  nav a {
-    color: #ccc;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 15px;
-    transition: all 0.3s;
-    position: relative;
-    cursor: pointer;
-  }
-
+  nav ul { display: flex; gap: 30px; list-style: none; align-items: center; }
+  nav a { color: #ccc; text-decoration: none; font-weight: 600; font-size: 15px; cursor: pointer; }
   nav a:hover { color: #00b4ff; }
 
-  nav a::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    right: 0;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #8a2be2, #00b4ff);
-    transition: width 0.3s;
-  }
-
-  nav a:hover::after { width: 100%; }
-
   .login-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 22px;
-    background: linear-gradient(135deg, #8a2be2, #00b4ff);
-    border: none;
-    border-radius: 30px;
-    color: white;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    font-family: 'Cairo', sans-serif;
-    transition: all 0.3s;
-    box-shadow: 0 5px 20px rgba(138, 43, 226, 0.4);
+    display: flex; align-items: center; gap: 8px; padding: 10px 22px;
+    background: linear-gradient(135deg, #8a2be2, #00b4ff); border: none;
+    border-radius: 30px; color: white; font-size: 14px; font-weight: 700;
+    cursor: pointer; font-family: 'Cairo', sans-serif;
   }
+  .login-btn svg { width: 18px; height: 18px; fill: white; }
 
-  .login-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(138, 43, 226, 0.6);
-  }
-
-  .login-btn svg {
-    width: 18px;
-    height: 18px;
-    fill: white;
-  }
-
-  .user-profile {
-    display: none;
-    align-items: center;
-    gap: 10px;
-    padding: 6px 14px 6px 6px;
-    background: rgba(138, 43, 226, 0.15);
-    border: 1px solid rgba(138, 43, 226, 0.4);
-    border-radius: 30px;
-    cursor: pointer;
-    transition: all 0.3s;
-    position: relative;
-  }
-
+  .user-profile { display: none; align-items: center; gap: 10px; padding: 6px 14px 6px 6px; background: rgba(138, 43, 226, 0.15); border: 1px solid rgba(138, 43, 226, 0.4); border-radius: 30px; cursor: pointer; position: relative; }
   .user-profile.active { display: flex; }
-
-  .user-profile:hover {
-    background: rgba(138, 43, 226, 0.25);
-    border-color: rgba(0, 180, 255, 0.5);
-  }
-
-  .user-avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #8a2be2, #00b4ff);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 14px;
-    overflow: hidden;
-  }
-
-  .user-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .user-name {
-    font-size: 14px;
-    font-weight: 700;
-    max-width: 120px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .user-dropdown {
-    position: absolute;
-    top: calc(100% + 10px);
-    left: 0;
-    right: 0;
-    min-width: 220px;
-    background: rgba(20, 20, 35, 0.98);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(138, 43, 226, 0.3);
-    border-radius: 15px;
-    padding: 10px;
-    display: none;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-    z-index: 200;
-  }
-
+  .user-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #8a2be2, #00b4ff); display: flex; align-items: center; justify-content: center; font-weight: 700; overflow: hidden; }
+  .user-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .user-name { font-size: 14px; font-weight: 700; }
+  .user-dropdown { position: absolute; top: calc(100% + 10px); left: 0; min-width: 220px; background: rgba(20, 20, 35, 0.98); border: 1px solid rgba(138, 43, 226, 0.3); border-radius: 15px; padding: 10px; display: none; z-index: 200; }
   .user-dropdown.show { display: block; }
-
-  .dropdown-user-info {
-    padding: 12px;
-    border-bottom: 1px solid rgba(138, 43, 226, 0.2);
-    margin-bottom: 8px;
-  }
-
-  .dropdown-user-info .name { font-weight: 700; font-size: 15px; margin-bottom: 4px; }
-  .dropdown-user-info .email { font-size: 12px; color: #888; word-break: break-all; }
-
-  .dropdown-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 12px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-size: 14px;
-    color: #ccc;
-  }
-
+  .dropdown-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; cursor: pointer; font-size: 14px; color: #ccc; }
   .dropdown-item:hover { background: rgba(138, 43, 226, 0.15); color: white; }
   .dropdown-item.danger { color: #ff6b6b; }
-  .dropdown-item.danger:hover { background: rgba(255, 107, 107, 0.1); }
 
-  .menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 28px;
-    cursor: pointer;
-  }
+  .hero { text-align: center; padding: 80px 20px 60px; }
+  .hero h1 { font-size: clamp(36px, 6vw, 72px); font-weight: 900; margin-bottom: 20px; background: linear-gradient(135deg, #fff 0%, #8a2be2 50%, #00b4ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero p { font-size: 18px; color: #aaa; max-width: 600px; margin: 0 auto; line-height: 1.8; }
 
-  /* ===== PAGES ===== */
-  .page { display: none; animation: fadeIn 0.5s ease-out; }
-  .page.active { display: block; }
+  .sections-container { padding: 40px 5% 80px; max-width: 1400px; margin: 0 auto; }
+  .section-title { font-size: 32px; font-weight: 900; margin-bottom: 40px; text-align: center; }
+  .section-title::after { content: ''; display: block; width: 80px; height: 4px; background: linear-gradient(90deg, #8a2be2, #00b4ff); margin: 15px auto 0; border-radius: 2px; }
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ===== HERO ===== */
-  .hero {
-    text-align: center;
-    padding: 80px 20px 60px;
-    position: relative;
-  }
-
-  .hero h1 {
-    font-size: clamp(36px, 6vw, 72px);
-    font-weight: 900;
-    margin-bottom: 20px;
-    background: linear-gradient(135deg, #fff 0%, #8a2be2 50%, #00b4ff 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: shine 3s ease-in-out infinite;
-  }
-
-  @keyframes shine {
-    0%, 100% { filter: brightness(1); }
-    50% { filter: brightness(1.3); }
-  }
-
-  .hero p {
-    font-size: 18px;
-    color: #aaa;
-    max-width: 600px;
-    margin: 0 auto;
-    line-height: 1.8;
-  }
-
-  .sub-hero {
-    text-align: center;
-    padding: 50px 20px 30px;
-  }
-
-  .sub-hero h1 {
-    font-size: clamp(30px, 5vw, 52px);
-    font-weight: 900;
-    margin-bottom: 15px;
-    background: linear-gradient(135deg, #fff 0%, #8a2be2 50%, #00b4ff 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .sub-hero p { font-size: 16px; color: #aaa; max-width: 600px; margin: 0 auto; line-height: 1.7; }
-
-  /* ===== SECTIONS ===== */
-  .sections-container {
-    padding: 40px 5% 80px;
-    max-width: 1400px;
-    margin: 0 auto;
-  }
-
-  .section-title {
-    font-size: 32px;
-    font-weight: 900;
-    margin-bottom: 40px;
-    text-align: center;
-    position: relative;
-    display: inline-block;
-    width: 100%;
-  }
-
-  .section-title::after {
-    content: '';
-    display: block;
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(90deg, #8a2be2, #00b4ff);
-    margin: 15px auto 0;
-    border-radius: 2px;
-  }
-
-  .sections-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
-  }
-
+  .sections-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
   .section-card {
     background: linear-gradient(135deg, rgba(30, 30, 50, 0.6), rgba(20, 20, 35, 0.6));
-    border: 1px solid rgba(138, 43, 226, 0.2);
-    border-radius: 20px;
-    padding: 35px 25px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-    backdrop-filter: blur(10px);
+    border: 1px solid rgba(138, 43, 226, 0.2); border-radius: 20px; padding: 35px 25px;
+    text-align: center; cursor: pointer; transition: all 0.4s; position: relative; overflow: hidden;
   }
+  .section-card:hover { transform: translateY(-10px); border-color: rgba(0, 180, 255, 0.5); box-shadow: 0 20px 40px rgba(138, 43, 226, 0.3); }
+  .section-card.disabled { opacity: 0.5; cursor: not-allowed; filter: grayscale(0.7); }
+  .section-card.disabled:hover { transform: none; box-shadow: none; }
+  .disabled-overlay { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4); align-items: center; justify-content: center; flex-direction: column; gap: 10px; border-radius: 20px; }
+  .section-card.disabled .disabled-overlay { display: flex; }
+  .disabled-overlay svg { width: 50px; height: 50px; fill: #ff6b6b; }
+  .disabled-overlay span { color: #ff6b6b; font-weight: 700; }
 
-  .section-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(138, 43, 226, 0.1), transparent);
-    transition: left 0.6s;
-  }
-
-  .section-card:hover::before { left: 100%; }
-
-  .section-card:hover {
-    transform: translateY(-10px);
-    border-color: rgba(0, 180, 255, 0.5);
-    box-shadow: 0 20px 40px rgba(138, 43, 226, 0.3);
-  }
-
-  .card-icon {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto 20px;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.4s;
-  }
-
-  .section-card:hover .card-icon { transform: scale(1.1) rotate(5deg); }
+  .card-icon { width: 80px; height: 80px; margin: 0 auto 20px; border-radius: 20px; display: flex; align-items: center; justify-content: center; }
   .card-icon svg { width: 45px; height: 45px; fill: white; }
-
-  .icon-playstation { background: linear-gradient(135deg, #003791, #0070d1); box-shadow: 0 10px 30px rgba(0,112,209,0.4); }
-  .icon-savedata { background: linear-gradient(135deg, #8a2be2, #b829e8); box-shadow: 0 10px 30px rgba(138,43,226,0.4); }
-  .icon-mods { background: linear-gradient(135deg, #ff6b00, #ff0066); box-shadow: 0 10px 30px rgba(255,107,0,0.4); }
-  .icon-tools { background: linear-gradient(135deg, #00b4ff, #00ff88); box-shadow: 0 10px 30px rgba(0,180,255,0.4); }
-  .icon-apps { background: linear-gradient(135deg, #ff0080, #ff8c00); box-shadow: 0 10px 30px rgba(255,0,128,0.4); }
-  .icon-ps4 { background: linear-gradient(135deg, #003791, #0070d1); box-shadow: 0 10px 30px rgba(0,112,209,0.4); }
-  .icon-ps2 { background: linear-gradient(135deg, #1a1a2e, #4a4a7e); box-shadow: 0 10px 30px rgba(74,74,126,0.4); }
-  .icon-ps5 { background: linear-gradient(135deg, #ffffff, #0070d1); box-shadow: 0 10px 30px rgba(255,255,255,0.3); }
+  .icon-playstation { background: linear-gradient(135deg, #003791, #0070d1); }
+  .icon-savedata { background: linear-gradient(135deg, #8a2be2, #b829e8); }
+  .icon-mods { background: linear-gradient(135deg, #ff6b00, #ff0066); }
+  .icon-tools { background: linear-gradient(135deg, #00b4ff, #00ff88); }
+  .icon-apps { background: linear-gradient(135deg, #ff0080, #ff8c00); }
+  .icon-ps4 { background: linear-gradient(135deg, #003791, #0070d1); }
+  .icon-ps2 { background: linear-gradient(135deg, #1a1a2e, #4a4a7e); }
+  .icon-ps5 { background: linear-gradient(135deg, #ffffff, #0070d1); }
   .icon-ps5 svg { fill: #003791; }
-  .icon-arabic { background: linear-gradient(135deg, #007a3d, #ce1126); box-shadow: 0 10px 30px rgba(0,122,61,0.4); }
+  .icon-arabic { background: linear-gradient(135deg, #007a3d, #ce1126); }
 
-  .section-card h3 { font-size: 22px; font-weight: 800; margin-bottom: 10px; color: #fff; }
+  .section-card h3 { font-size: 22px; font-weight: 800; margin-bottom: 10px; }
   .section-card p { color: #999; font-size: 14px; line-height: 1.7; margin-bottom: 20px; }
-
-  .empty-badge {
-    display: inline-block;
-    padding: 6px 16px;
-    background: rgba(255,255,255,0.05);
-    border: 1px dashed rgba(255,255,255,0.2);
-    border-radius: 20px;
-    font-size: 13px;
-    color: #888;
-    margin-top: 10px;
-  }
+  .empty-badge { display: inline-block; padding: 6px 16px; background: rgba(255, 255, 255, 0.05); border: 1px dashed rgba(255, 255, 255, 0.2); border-radius: 20px; font-size: 13px; color: #888; }
   .empty-badge::before { content: '⏳ '; }
+  .arrow-badge { display: inline-block; padding: 6px 16px; background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(0, 180, 255, 0.2)); border: 1px solid rgba(0, 180, 255, 0.3); border-radius: 20px; font-size: 13px; color: #00b4ff; }
 
-  .arrow-badge {
-    display: inline-block;
-    padding: 6px 16px;
-    background: linear-gradient(135deg, rgba(138,43,226,0.2), rgba(0,180,255,0.2));
-    border: 1px solid rgba(0,180,255,0.3);
-    border-radius: 20px;
-    font-size: 13px;
-    color: #00b4ff;
-    margin-top: 10px;
-    transition: all 0.3s;
-  }
-
-  .section-card:hover .arrow-badge {
-    background: linear-gradient(135deg, rgba(138,43,226,0.4), rgba(0,180,255,0.4));
-    transform: translateX(-5px);
-  }
-
-  /* ===== GAME CARDS ===== */
-  .games-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 25px;
-    margin-top: 30px;
-  }
-
-  .game-card {
-    background: linear-gradient(135deg, rgba(30,30,50,0.8), rgba(20,20,35,0.8));
-    border: 1px solid rgba(138,43,226,0.2);
-    border-radius: 20px;
-    overflow: hidden;
-    transition: all 0.4s;
-    position: relative;
-  }
-
-  .game-card:hover {
-    transform: translateY(-8px);
-    border-color: rgba(0,180,255,0.5);
-    box-shadow: 0 15px 30px rgba(138,43,226,0.3);
-  }
-
-  .game-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-  }
-
-  .game-card .game-info {
-    padding: 20px;
-  }
-
-  .game-card .game-info h4 {
-    font-size: 18px;
-    font-weight: 800;
-    margin-bottom: 8px;
-    color: #fff;
-  }
-
-  .game-card .game-info p {
-    color: #999;
-    font-size: 14px;
-    line-height: 1.6;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .game-card .game-download {
-    display: inline-block;
-    margin-top: 15px;
-    padding: 8px 20px;
-    background: linear-gradient(135deg, #8a2be2, #00b4ff);
-    border-radius: 30px;
-    color: white;
-    font-weight: 700;
-    font-size: 13px;
-    text-decoration: none;
-    transition: all 0.3s;
-  }
-
-  .game-card .game-download:hover { transform: scale(1.05); opacity: 0.9; }
-
-  .game-card .game-platform {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 5px 12px;
-    background: rgba(0,0,0,0.7);
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
-    font-size: 12px;
-    font-weight: 700;
-    color: #00b4ff;
-  }
-
-  /* ===== BREADCRUMB ===== */
-  .breadcrumb {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 20px 5%;
-    max-width: 1400px;
-    margin: 0 auto;
-    font-size: 15px;
-    flex-wrap: wrap;
-  }
-
-  .breadcrumb-item { color: #888; cursor: pointer; transition: color 0.3s; display: flex; align-items: center; gap: 10px; }
+  .breadcrumb { display: flex; align-items: center; gap: 10px; padding: 20px 5%; max-width: 1400px; margin: 0 auto; font-size: 15px; flex-wrap: wrap; }
+  .breadcrumb-item { color: #888; cursor: pointer; }
   .breadcrumb-item:hover { color: #00b4ff; }
   .breadcrumb-item.active { color: #fff; font-weight: 700; cursor: default; }
-  .breadcrumb-separator { color: #555; font-size: 14px; }
+  .breadcrumb-separator { color: #555; }
 
-  .back-btn {
+  .back-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; background: rgba(138, 43, 226, 0.15); border: 1px solid rgba(138, 43, 226, 0.4); border-radius: 30px; color: #fff; font-size: 15px; font-weight: 600; cursor: pointer; margin-bottom: 20px; font-family: 'Cairo', sans-serif; }
+  .back-btn:hover { background: linear-gradient(135deg, #8a2be2, #00b4ff); }
+
+  .page { display: none; animation: fadeIn 0.5s ease-out; }
+  .page.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+  .sub-hero { text-align: center; padding: 50px 20px 30px; }
+  .sub-hero h1 { font-size: clamp(30px, 5vw, 52px); font-weight: 900; margin-bottom: 15px; background: linear-gradient(135deg, #fff 0%, #8a2be2 50%, #00b4ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .sub-hero p { font-size: 16px; color: #aaa; max-width: 600px; margin: 0 auto; }
+
+  .empty-state { text-align: center; padding: 80px 20px; max-width: 600px; margin: 0 auto; }
+  .empty-state-icon { width: 120px; height: 120px; margin: 0 auto 25px; background: linear-gradient(135deg, rgba(138, 43, 226, 0.15), rgba(0, 180, 255, 0.15)); border: 2px dashed rgba(138, 43, 226, 0.4); border-radius: 30px; display: flex; align-items: center; justify-content: center; animation: float 3s ease-in-out infinite; }
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+  .empty-state-icon svg { width: 60px; height: 60px; fill: #8a2be2; }
+  .empty-state h2 { font-size: 28px; font-weight: 800; margin-bottom: 12px; }
+  .empty-state p { color: #888; font-size: 16px; line-height: 1.8; margin-bottom: 25px; }
+  .notify-btn { padding: 12px 30px; background: linear-gradient(135deg, #8a2be2, #00b4ff); border: none; border-radius: 30px; color: white; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'Cairo', sans-serif; }
+
+  footer { background: rgba(10, 10, 21, 0.9); border-top: 1px solid rgba(138, 43, 226, 0.2); padding: 30px 5%; text-align: center; color: #777; font-size: 14px; }
+  footer .social { display: flex; justify-content: center; gap: 15px; margin-bottom: 15px; }
+  footer .social a { width: 40px; height: 40px; background: rgba(138, 43, 226, 0.1); border: 1px solid rgba(138, 43, 226, 0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #aaa; text-decoration: none; }
+
+  .menu-toggle { display: none; background: none; border: none; color: white; font-size: 28px; cursor: pointer; }
+
+  .games-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+  .game-card { background: linear-gradient(135deg, rgba(30, 30, 50, 0.6), rgba(20, 20, 35, 0.6)); border: 1px solid rgba(138, 43, 226, 0.2); border-radius: 20px; overflow: hidden; cursor: pointer; transition: all 0.4s; }
+  .game-card:hover { transform: translateY(-10px); border-color: rgba(0, 180, 255, 0.5); box-shadow: 0 20px 40px rgba(138, 43, 226, 0.3); }
+  .game-card-image-wrapper { overflow: hidden; position: relative; }
+  .game-card-image { width: 100%; height: 380px; object-fit: cover; display: block; transition: transform 0.4s; }
+  .game-card:hover .game-card-image { transform: scale(1.05); }
+  .game-card-badge { position: absolute; top: 15px; right: 15px; padding: 6px 14px; background: linear-gradient(135deg, #007a3d, #ce1126); border-radius: 20px; font-size: 12px; font-weight: 700; color: white; z-index: 2; }
+  .game-card-info { padding: 20px; }
+  .game-card-title { font-size: 18px; font-weight: 800; margin-bottom: 8px; }
+  .game-card-meta { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+  .meta-tag { padding: 4px 12px; background: rgba(138, 43, 226, 0.15); border: 1px solid rgba(138, 43, 226, 0.3); border-radius: 15px; font-size: 12px; color: #ccc; }
+  .game-card-desc { color: #888; font-size: 13px; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .game-card-cta { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 15px; padding: 10px; background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(0, 180, 255, 0.2)); border-radius: 12px; color: #00b4ff; font-size: 13px; font-weight: 700; }
+
+  .savedata-card { background: linear-gradient(135deg, rgba(30, 30, 50, 0.6), rgba(20, 20, 35, 0.6)); border: 1px solid rgba(138, 43, 226, 0.2); border-radius: 20px; overflow: hidden; cursor: pointer; transition: all 0.4s; }
+  .savedata-card:hover { transform: translateY(-10px); border-color: rgba(138, 43, 226, 0.6); box-shadow: 0 20px 40px rgba(138, 43, 226, 0.3); }
+  .savedata-image-wrapper { overflow: hidden; position: relative; height: 220px; background: linear-gradient(135deg, #8a2be2, #00b4ff); display: flex; align-items: center; justify-content: center; }
+  .savedata-image-wrapper svg { width: 100px; height: 100px; fill: white; opacity: 0.9; }
+  .savedata-badge { position: absolute; top: 15px; right: 15px; padding: 6px 14px; background: linear-gradient(135deg, #8a2be2, #b829e8); border-radius: 20px; font-size: 12px; font-weight: 700; color: white; z-index: 2; }
+  .completion-badge { position: absolute; bottom: 15px; left: 15px; padding: 6px 14px; background: linear-gradient(135deg, #ffaa00, #ff6600); border-radius: 20px; font-size: 12px; font-weight: 700; color: white; z-index: 2; }
+  .savedata-info { padding: 20px; }
+  .savedata-title { font-size: 18px; font-weight: 800; margin-bottom: 8px; }
+  .savedata-meta { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+  .savedata-desc { color: #888; font-size: 13px; line-height: 1.6; }
+  .savedata-cta { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 15px; padding: 10px; background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(0, 180, 255, 0.2)); border-radius: 12px; color: #00b4ff; font-size: 13px; font-weight: 700; }
+  .savedata-card:hover .savedata-cta { background: linear-gradient(135deg, #8a2be2, #00b4ff); color: white; }
+
+  .game-modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px); z-index: 2000; justify-content: center; align-items: flex-start; padding: 20px; overflow-y: auto; }
+  .game-modal-overlay.show { display: flex; }
+  .game-modal { background: linear-gradient(135deg, rgba(20, 20, 35, 0.98), rgba(10, 10, 21, 0.98)); border: 1px solid rgba(138, 43, 226, 0.4); border-radius: 25px; max-width: 900px; width: 100%; margin: 30px auto; position: relative; overflow: hidden; animation: modalIn 0.4s; }
+  @keyframes modalIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+  .game-modal-close { position: absolute; top: 20px; left: 20px; width: 42px; height: 42px; background: rgba(0, 0, 0, 0.6); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50%; color: #fff; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; }
+  .game-modal-hero { position: relative; width: 100%; height: 400px; overflow: hidden; }
+  .game-modal-hero img { width: 100%; height: 100%; object-fit: cover; }
+  .game-modal-hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 200px; background: linear-gradient(to top, rgba(10, 10, 21, 1), transparent); }
+  .game-modal-hero-content { position: absolute; bottom: 30px; right: 30px; left: 30px; z-index: 2; }
+  .game-modal-title { font-size: clamp(28px, 5vw, 42px); font-weight: 900; margin-bottom: 10px; text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8); }
+  .game-modal-badges { display: flex; gap: 10px; flex-wrap: wrap; }
+  .badge { padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 700; }
+  .badge-arabic { background: linear-gradient(135deg, #007a3d, #ce1126); color: white; }
+  .badge-ps4 { background: linear-gradient(135deg, #003791, #0070d1); color: white; }
+  .badge-size { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); color: white; }
+  .badge-save { background: linear-gradient(135deg, #8a2be2, #b829e8); color: white; }
+  .badge-completion { background: linear-gradient(135deg, #ffaa00, #ff6600); color: white; }
+  .badge-version { background: rgba(0, 180, 255, 0.2); color: #00b4ff; border: 1px solid rgba(0, 180, 255, 0.3); }
+
+  .game-modal-body { padding: 30px; }
+  .game-modal-section { margin-bottom: 25px; }
+  .game-modal-section h3 { font-size: 20px; font-weight: 800; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+  .game-modal-section h3 .icon { width: 32px; height: 32px; background: linear-gradient(135deg, #8a2be2, #00b4ff); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+  .game-modal-description { color: #ccc; font-size: 15px; line-height: 1.9; background: rgba(255, 255, 255, 0.03); padding: 20px; border-radius: 15px; border-right: 3px solid #8a2be2; }
+  .game-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 15px; }
+  .feature-item { display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: rgba(138, 43, 226, 0.08); border: 1px solid rgba(138, 43, 226, 0.2); border-radius: 12px; font-size: 14px; color: #ddd; }
+  .feature-item .check { width: 24px; height: 24px; background: linear-gradient(135deg, #00ff88, #00b4ff); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #0a0a15; font-weight: 900; font-size: 14px; flex-shrink: 0; }
+
+  .download-list { display: flex; flex-direction: column; gap: 12px; }
+  .download-item { background: linear-gradient(135deg, rgba(30, 30, 50, 0.6), rgba(20, 20, 35, 0.6)); border: 1px solid rgba(138, 43, 226, 0.2); border-radius: 15px; padding: 20px; display: flex; justify-content: space-between; align-items: center; gap: 15px; flex-wrap: wrap; transition: all 0.3s; }
+  .download-item:hover { border-color: rgba(0, 180, 255, 0.5); transform: translateX(-5px); }
+  .download-info { flex: 1; min-width: 200px; }
+  .download-title { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+  .download-subtitle { font-size: 13px; color: #888; }
+  
+  /* ===== زر التحميل ===== */
+  .download-btn {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 22px;
-    background: rgba(138,43,226,0.15);
-    border: 1px solid rgba(138,43,226,0.4);
-    border-radius: 30px;
-    color: #fff;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-    margin-bottom: 20px;
-    font-family: 'Cairo', sans-serif;
-  }
-
-  .back-btn:hover {
-    background: linear-gradient(135deg, #8a2be2, #00b4ff);
-    transform: translateX(5px);
-    border-color: transparent;
-  }
-
-  /* ===== EMPTY STATE ===== */
-  .empty-state {
-    text-align: center;
-    padding: 80px 20px;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
-  .empty-state-icon {
-    width: 120px;
-    height: 120px;
-    margin: 0 auto 25px;
-    background: linear-gradient(135deg, rgba(138,43,226,0.15), rgba(0,180,255,0.15));
-    border: 2px dashed rgba(138,43,226,0.4);
-    border-radius: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: float 3s ease-in-out infinite;
-  }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
-  }
-
-  .empty-state-icon svg { width: 60px; height: 60px; fill: #8a2be2; }
-  .empty-state h2 { font-size: 28px; font-weight: 800; margin-bottom: 12px; color: #fff; }
-  .empty-state p { color: #888; font-size: 16px; line-height: 1.8; margin-bottom: 25px; }
-
-  .notify-btn {
-    padding: 12px 30px;
-    background: linear-gradient(135deg, #8a2be2, #00b4ff);
-    border: none;
-    border-radius: 30px;
-    color: white;
-    font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
-    font-family: 'Cairo', sans-serif;
-    transition: all 0.3s;
-    box-shadow: 0 10px 30px rgba(138,43,226,0.4);
-  }
-  .notify-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(138,43,226,0.6); }
-
-  /* ===== MODAL ===== */
-  .modal-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.7);
-    backdrop-filter: blur(8px);
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    animation: fadeIn 0.3s ease-out;
-  }
-  .modal-overlay.show { display: flex; }
-
-  .modal {
-    background: linear-gradient(135deg, rgba(25,25,45,0.98), rgba(15,15,30,0.98));
-    border: 1px solid rgba(138,43,226,0.4);
-    border-radius: 25px;
-    padding: 40px 35px;
-    max-width: 450px;
-    width: 100%;
-    position: relative;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 60px rgba(138,43,226,0.2);
-    animation: modalIn 0.4s cubic-bezier(0.4,0,0.2,1);
-    max-height: 90vh;
-    overflow-y: auto;
-  }
-
-  .modal-lg { max-width: 700px; }
-
-  @keyframes modalIn {
-    from { opacity: 0; transform: scale(0.9) translateY(20px); }
-    to { opacity: 1; transform: scale(1) translateY(0); }
-  }
-
-  .modal-close {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    width: 36px;
-    height: 36px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 50%;
-    color: #fff;
-    font-size: 18px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s;
-  }
-  .modal-close:hover { background: rgba(255,107,107,0.2); border-color: rgba(255,107,107,0.5); transform: rotate(90deg); }
-
-  .modal-header { text-align: center; margin-bottom: 30px; }
-  .modal-logo {
-    width: 70px;
-    height: 70px;
-    margin: 0 auto 20px;
-    background: linear-gradient(135deg, #8a2be2, #00b4ff);
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 10px 30px rgba(138,43,226,0.5);
-  }
-  .modal-logo svg { width: 40px; height: 40px; fill: white; }
-  .modal-header h2 { font-size: 26px; font-weight: 800; margin-bottom: 8px; background: linear-gradient(135deg, #fff, #00b4ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-  .modal-header p { color: #888; font-size: 14px; }
-
-  .google-btn {
-    width: 100%;
-    padding: 14px;
-    background: white;
-    border: none;
-    border-radius: 12px;
-    color: #333;
-    font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
-    font-family: 'Cairo', sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    transition: all 0.3s;
-    margin-bottom: 20px;
-  }
-  .google-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(255,255,255,0.2); }
-  .google-btn svg { width: 22px; height: 22px; }
-
-  .divider {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin: 25px 0;
-    color: #666;
-    font-size: 13px;
-  }
-  .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.1); }
-
-  .form-group { margin-bottom: 18px; }
-  .form-group label { display: block; margin-bottom: 8px; font-size: 14px; font-weight: 600; color: #ccc; }
-  .form-group input, .form-group select, .form-group textarea {
-    width: 100%;
-    padding: 14px 16px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 12px;
-    color: white;
-    font-size: 15px;
-    font-family: 'Cairo', sans-serif;
-    transition: all 0.3s;
-  }
-  .form-group textarea { min-height: 120px; resize: vertical; }
-  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-    outline: none;
-    border-color: #8a2be2;
-    background: rgba(138,43,226,0.05);
-    box-shadow: 0 0 0 3px rgba(138,43,226,0.15);
-  }
-  .form-group input::placeholder, .form-group textarea::placeholder { color: #666; }
-  .form-group select option { background: #1a1a2e; color: white; }
-
-  .submit-btn {
-    width: 100%;
-    padding: 14px;
-    background: linear-gradient(135deg, #8a2be2, #00b4ff);
+    padding: 12px 28px;
+    background: linear-gradient(135deg, #00b46b, #008f55);
     border: none;
     border-radius: 12px;
     color: white;
@@ -744,385 +206,82 @@
     font-weight: 700;
     cursor: pointer;
     font-family: 'Cairo', sans-serif;
+    text-decoration: none;
     transition: all 0.3s;
-    margin-top: 10px;
-    box-shadow: 0 10px 30px rgba(138,43,226,0.4);
   }
-  .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 15px 40px rgba(138,43,226,0.6); }
-  .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-  .submit-btn-danger { background: linear-gradient(135deg, #ff6b6b, #ee0979); }
-
-  .modal-switch { text-align: center; margin-top: 20px; font-size: 14px; color: #888; }
-  .modal-switch a { color: #00b4ff; font-weight: 700; cursor: pointer; text-decoration: none; transition: color 0.3s; }
-  .modal-switch a:hover { color: #8a2be2; }
-  .forgot-link { display: block; text-align: left; margin-top: -10px; margin-bottom: 15px; color: #888; font-size: 13px; cursor: pointer; transition: color 0.3s; }
-  .forgot-link:hover { color: #00b4ff; }
-
-  .alert {
-    padding: 12px 16px;
-    border-radius: 10px;
-    margin-bottom: 15px;
-    font-size: 14px;
-    display: none;
+  .download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 180, 107, 0.4);
+    background: linear-gradient(135deg, #00d47b, #00a065);
   }
-  .alert.show { display: block; animation: fadeIn 0.3s; }
-  .alert.error { background: rgba(255,107,107,0.1); border: 1px solid rgba(255,107,107,0.3); color: #ff6b6b; }
-  .alert.success { background: rgba(0,255,136,0.1); border: 1px solid rgba(0,255,136,0.3); color: #00ff88; }
+  .download-btn svg { width: 18px; height: 18px; fill: white; }
+  .download-btn:active { transform: scale(0.95); }
+  
+  .download-note { padding: 15px 20px; background: rgba(255, 165, 0, 0.1); border: 1px solid rgba(255, 165, 0, 0.3); border-radius: 12px; color: #ffaa66; font-size: 14px; margin-bottom: 20px; }
 
-  /* ===== TOAST ===== */
-  .toast {
-    position: fixed;
-    top: 100px;
-    left: 50%;
-    transform: translateX(-50%) translateY(-20px);
-    padding: 14px 24px;
-    background: rgba(25,25,45,0.98);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(138,43,226,0.4);
-    border-radius: 15px;
-    color: white;
-    font-size: 14px;
-    font-weight: 600;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-    z-index: 2000;
-    opacity: 0;
-    transition: all 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+  .save-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px; }
+  .save-info-item { background: rgba(138, 43, 226, 0.08); border: 1px solid rgba(138, 43, 226, 0.2); border-radius: 12px; padding: 15px; }
+  .save-info-label { color: #888; font-size: 12px; margin-bottom: 5px; }
+  .save-info-value { color: #fff; font-size: 16px; font-weight: 700; }
+  .password-box { background: linear-gradient(135deg, rgba(255, 170, 0, 0.1), rgba(255, 102, 0, 0.1)); border: 1px solid rgba(255, 170, 0, 0.3); border-radius: 12px; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; gap: 15px; margin: 15px 0; }
+  .password-label { color: #ffaa00; font-size: 14px; font-weight: 700; }
+  .password-value { color: #fff; font-size: 18px; font-weight: 900; letter-spacing: 2px; font-family: monospace; }
+  .copy-btn { padding: 6px 14px; background: rgba(255, 170, 0, 0.2); border: 1px solid rgba(255, 170, 0, 0.4); border-radius: 8px; color: #ffaa00; font-size: 12px; font-weight: 700; cursor: pointer; font-family: 'Cairo', sans-serif; }
+  .notes-box { background: rgba(0, 180, 255, 0.05); border: 1px solid rgba(0, 180, 255, 0.2); border-radius: 12px; padding: 15px 20px; margin-top: 15px; }
+  .notes-box h4 { color: #00b4ff; font-size: 14px; margin-bottom: 10px; }
+  .notes-box ul { list-style: none; padding: 0; }
+  .notes-box li { color: #ccc; font-size: 13px; padding: 5px 0; padding-right: 20px; position: relative; }
+  .notes-box li::before { content: '•'; position: absolute; right: 0; color: #00b4ff; }
+
+  .toast { position: fixed; top: 100px; left: 50%; transform: translateX(-50%) translateY(-20px); padding: 14px 24px; background: rgba(25, 25, 45, 0.98); backdrop-filter: blur(20px); border: 1px solid rgba(138, 43, 226, 0.4); border-radius: 15px; color: white; z-index: 3000; opacity: 0; transition: all 0.3s; }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-  .toast.success { border-color: rgba(0,255,136,0.5); }
-  .toast.error { border-color: rgba(255,107,107,0.5); }
+  .toast.error { border-color: rgba(255, 107, 107, 0.5); }
 
-  .spinner {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    border: 2px solid rgba(255,255,255,0.3);
-    border-top-color: white;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-  }
+  .spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.8s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* ===== ADMIN PANEL ===== */
-  .admin-layout {
-    display: flex;
-    gap: 30px;
-    align-items: flex-start;
-  }
-
-  .admin-sidebar {
-    min-width: 250px;
-    background: rgba(20,20,35,0.6);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(138,43,226,0.2);
-    border-radius: 20px;
-    padding: 20px;
-    position: sticky;
-    top: 100px;
-  }
-
-  .admin-sidebar .admin-profile {
-    text-align: center;
-    padding-bottom: 20px;
-    border-bottom: 1px solid rgba(138,43,226,0.2);
-    margin-bottom: 20px;
-  }
-
-  .admin-sidebar .admin-profile .avatar {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #8a2be2, #00b4ff);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    font-weight: 800;
-    margin: 0 auto 12px;
-  }
-
-  .admin-sidebar .admin-profile h4 { font-size: 16px; font-weight: 700; }
-  .admin-sidebar .admin-profile p { font-size: 13px; color: #888; }
-
-  .admin-menu { list-style: none; }
-  .admin-menu li {
-    padding: 12px 16px;
-    margin-bottom: 5px;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-weight: 600;
-    color: #aaa;
-  }
-  .admin-menu li:hover { background: rgba(138,43,226,0.1); color: white; }
-  .admin-menu li.active { background: rgba(138,43,226,0.2); color: white; border: 1px solid rgba(138,43,226,0.3); }
-  .admin-menu li .badge {
-    margin-right: auto;
-    background: rgba(138,43,226,0.3);
-    padding: 2px 10px;
-    border-radius: 10px;
-    font-size: 12px;
-    color: #00b4ff;
-  }
-
-  .admin-content { flex: 1; }
-
-  .admin-stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    margin-bottom: 30px;
-  }
-
-  .stat-card {
-    background: rgba(20,20,35,0.6);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(138,43,226,0.2);
-    border-radius: 15px;
-    padding: 20px;
-    text-align: center;
-  }
-
-  .stat-card .number { font-size: 32px; font-weight: 900; background: linear-gradient(135deg, #8a2be2, #00b4ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-  .stat-card .label { font-size: 14px; color: #888; margin-top: 5px; }
-
-  .admin-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: rgba(20,20,35,0.4);
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
-    overflow: hidden;
-  }
-
-  .admin-table th {
-    background: rgba(138,43,226,0.15);
-    padding: 15px;
-    text-align: right;
-    font-weight: 700;
-    font-size: 14px;
-    color: #ccc;
-  }
-
-  .admin-table td {
-    padding: 15px;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    font-size: 14px;
-  }
-
-  .admin-table tr:hover td { background: rgba(138,43,226,0.05); }
-
-  .admin-table .game-thumb {
-    width: 50px;
-    height: 50px;
-    border-radius: 10px;
-    object-fit: cover;
-  }
-
-  .admin-actions {
-    display: flex;
-    gap: 8px;
-  }
-
-  .admin-actions button {
-    padding: 6px 14px;
-    border: none;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-    font-family: 'Cairo', sans-serif;
-  }
-
-  .admin-actions .edit-btn { background: rgba(0,180,255,0.2); color: #00b4ff; }
-  .admin-actions .edit-btn:hover { background: rgba(0,180,255,0.3); }
-  .admin-actions .delete-btn { background: rgba(255,107,107,0.2); color: #ff6b6b; }
-  .admin-actions .delete-btn:hover { background: rgba(255,107,107,0.3); }
-
-  .admin-toolbar {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-  }
-
-  .admin-toolbar input,
-  .admin-toolbar select {
-    padding: 10px 16px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 12px;
-    color: white;
-    font-size: 14px;
-    font-family: 'Cairo', sans-serif;
-    flex: 1;
-    min-width: 200px;
-  }
-  .admin-toolbar input:focus,
-  .admin-toolbar select:focus {
-    outline: none;
-    border-color: #8a2be2;
-  }
-  .admin-toolbar input::placeholder { color: #666; }
-
-  .add-btn {
-    padding: 10px 25px;
-    background: linear-gradient(135deg, #8a2be2, #00b4ff);
-    border: none;
-    border-radius: 12px;
-    color: white;
-    font-weight: 700;
-    cursor: pointer;
-    font-family: 'Cairo', sans-serif;
-    transition: all 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .add-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(138,43,226,0.4); }
-
-  .image-preview {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 10px;
-  }
-  .image-preview img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 10px;
-    border: 2px solid rgba(138,43,226,0.3);
-  }
-
-  .file-upload-wrapper {
-    position: relative;
-    overflow: hidden;
-    display: inline-block;
-    width: 100%;
-  }
-
-  .file-upload-wrapper input[type=file] {
-    position: absolute;
-    left: 0;
-    top: 0;
-    opacity: 0;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-  }
-
-  .file-upload-label {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 14px;
-    background: rgba(255,255,255,0.05);
-    border: 2px dashed rgba(138,43,226,0.3);
-    border-radius: 12px;
-    color: #888;
-    font-weight: 600;
-    transition: all 0.3s;
-    cursor: pointer;
-  }
-
-  .file-upload-label:hover {
-    border-color: #8a2be2;
-    background: rgba(138,43,226,0.05);
-  }
-
-  /* ===== RESPONSIVE ===== */
-  @media (max-width: 992px) {
-    .admin-layout { flex-direction: column; }
-    .admin-sidebar {
-      position: static;
-      width: 100%;
-    }
-    .admin-sidebar .admin-menu {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .admin-sidebar .admin-menu li {
-      flex: 1;
-      min-width: 120px;
-      justify-content: center;
-    }
-  }
+  .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(8px); z-index: 1000; justify-content: center; align-items: center; padding: 20px; }
+  .modal-overlay.show { display: flex; }
+  .modal { background: linear-gradient(135deg, rgba(25, 25, 45, 0.98), rgba(15, 15, 30, 0.98)); border: 1px solid rgba(138, 43, 226, 0.4); border-radius: 25px; padding: 40px 35px; max-width: 450px; width: 100%; position: relative; max-height: 90vh; overflow-y: auto; }
+  .modal-close { position: absolute; top: 15px; left: 15px; width: 36px; height: 36px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 50%; color: #fff; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  .modal-header { text-align: center; margin-bottom: 30px; }
+  .modal-logo { width: 70px; height: 70px; margin: 0 auto 20px; background: linear-gradient(135deg, #8a2be2, #00b4ff); border-radius: 20px; display: flex; align-items: center; justify-content: center; }
+  .modal-logo svg { width: 40px; height: 40px; fill: white; }
+  .modal-header h2 { font-size: 26px; font-weight: 800; margin-bottom: 8px; background: linear-gradient(135deg, #fff, #00b4ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .modal-header p { color: #888; font-size: 14px; }
+  .google-btn { width: 100%; padding: 14px; background: white; border: none; border-radius: 12px; color: #333; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'Cairo', sans-serif; display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 20px; }
+  .google-btn svg { width: 22px; height: 22px; }
+  .divider { display: flex; align-items: center; gap: 15px; margin: 25px 0; color: #666; font-size: 13px; }
+  .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: rgba(255, 255, 255, 0.1); }
+  .form-group { margin-bottom: 18px; }
+  .form-group label { display: block; margin-bottom: 8px; font-size: 14px; font-weight: 600; color: #ccc; }
+  .form-group input { width: 100%; padding: 14px 16px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: white; font-size: 15px; font-family: 'Cairo', sans-serif; }
+  .form-group input:focus { outline: none; border-color: #8a2be2; }
+  .submit-btn { width: 100%; padding: 14px; background: linear-gradient(135deg, #8a2be2, #00b4ff); border: none; border-radius: 12px; color: white; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'Cairo', sans-serif; }
+  .modal-switch { text-align: center; margin-top: 20px; font-size: 14px; color: #888; }
+  .modal-switch a { color: #00b4ff; font-weight: 700; cursor: pointer; }
+  .forgot-link { display: block; text-align: left; margin-bottom: 15px; color: #888; font-size: 13px; cursor: pointer; }
+  .alert { padding: 12px 16px; border-radius: 10px; margin-bottom: 15px; font-size: 14px; display: none; }
+  .alert.show { display: block; }
+  .alert.error { background: rgba(255, 107, 107, 0.1); border: 1px solid rgba(255, 107, 107, 0.3); color: #ff6b6b; }
+  .alert.success { background: rgba(0, 255, 136, 0.1); border: 1px solid rgba(0, 255, 136, 0.3); color: #00ff88; }
 
   @media (max-width: 768px) {
     .menu-toggle { display: block; }
-    nav ul {
-      display: none;
-      position: absolute;
-      top: 100%;
-      right: 0;
-      left: 0;
-      background: rgba(10,10,21,0.98);
-      flex-direction: column;
-      padding: 20px;
-      gap: 15px;
-      border-bottom: 1px solid rgba(138,43,226,0.3);
-    }
+    nav ul { display: none; position: absolute; top: 100%; right: 0; left: 0; background: rgba(10, 10, 21, 0.98); flex-direction: column; padding: 20px; gap: 15px; }
     nav ul.active { display: flex; }
-    .hero { padding: 50px 20px 40px; }
     .user-name { display: none; }
-    .modal { padding: 30px 20px; }
-    .admin-table { font-size: 12px; }
-    .admin-table th, .admin-table td { padding: 10px; }
-    .admin-actions { flex-direction: column; }
-    .games-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
-  }
-
-  footer {
-    background: rgba(10,10,21,0.9);
-    border-top: 1px solid rgba(138,43,226,0.2);
-    padding: 30px 5%;
-    text-align: center;
-    color: #777;
-    font-size: 14px;
-  }
-
-  footer .social {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 15px;
-  }
-
-  footer .social a {
-    width: 40px;
-    height: 40px;
-    background: rgba(138,43,226,0.1);
-    border: 1px solid rgba(138,43,226,0.3);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s;
-    color: #aaa;
-    text-decoration: none;
-  }
-
-  footer .social a:hover {
-    background: linear-gradient(135deg, #8a2be2, #00b4ff);
-    transform: translateY(-3px);
-    color: white;
+    .game-modal-hero { height: 280px; }
+    .game-modal-body { padding: 20px; }
+    .download-item { flex-direction: column; align-items: stretch; }
+    .download-btn { width: 100%; justify-content: center; }
   }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="logo" onclick="showPage('home')">
+<header id="mainHeader">
+  <div class="logo" id="logoEl">
     <div class="logo-icon">
       <svg viewBox="0 0 24 24"><path d="M21.5 12.5c0-1.5-1-2.5-2.5-2.5h-4l-2-3h-2l-2 3H5c-1.5 0-2.5 1-2.5 2.5v6c0 1.5 1 2.5 2.5 2.5h14c1.5 0 2.5-1 2.5-2.5v-6zM8 16c-.83 0-1.5-.67-1.5-1.5S7.17 13 8 13s1.5.67 1.5 1.5S8.83 16 8 16zm8 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5S16.83 16 16 16z"/></svg>
     </div>
@@ -1133,11 +292,9 @@
     <ul>
       <li><a onclick="showPage('home')">الرئيسية</a></li>
       <li><a onclick="showPage('home'); setTimeout(()=>document.getElementById('sections').scrollIntoView({behavior:'smooth'}),100)">الأقسام</a></li>
-      <li><a href="#about">حول</a></li>
       <li><a href="#contact">تواصل</a></li>
-      <li id="admin-link" style="display:none;"><a onclick="showPage('admin')" style="color:#8a2be2;">⚙️ لوحة التحكم</a></li>
-      <li id="auth-container">
-        <button class="login-btn" id="loginBtn" onclick="openModal('login')">
+      <li>
+        <button class="login-btn" id="loginBtn" onclick="openModal()">
           <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
           تسجيل الدخول
         </button>
@@ -1145,12 +302,6 @@
           <div class="user-avatar" id="userAvatar">U</div>
           <span class="user-name" id="userName">المستخدم</span>
           <div class="user-dropdown" id="userDropdown">
-            <div class="dropdown-user-info">
-              <div class="name" id="dropdownName">المستخدم</div>
-              <div class="email" id="dropdownEmail">user@example.com</div>
-            </div>
-            <div class="dropdown-item" onclick="event.stopPropagation(); showToast('قريباً!', 'success')">👤 الملف الشخصي</div>
-            <div class="dropdown-item" onclick="event.stopPropagation(); showToast('قريباً!', 'success')">⚙️ الإعدادات</div>
             <div class="dropdown-item danger" onclick="event.stopPropagation(); signOutUser()">🚪 تسجيل الخروج</div>
           </div>
         </div>
@@ -1159,14 +310,12 @@
   </nav>
 </header>
 
-<!-- ===== LOGIN MODAL ===== -->
+<!-- Login Modal -->
 <div class="modal-overlay" id="loginModal">
   <div class="modal">
     <button class="modal-close" onclick="closeModal()">✕</button>
     <div class="modal-header">
-      <div class="modal-logo">
-        <svg viewBox="0 0 24 24"><path d="M21.5 12.5c0-1.5-1-2.5-2.5-2.5h-4l-2-3h-2l-2 3H5c-1.5 0-2.5 1-2.5 2.5v6c0 1.5 1 2.5 2.5 2.5h14c1.5 0 2.5-1 2.5-2.5v-6zM8 16c-.83 0-1.5-.67-1.5-1.5S7.17 13 8 13s1.5.67 1.5 1.5S8.83 16 8 16zm8 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5S16.83 16 16 16z"/></svg>
-      </div>
+      <div class="modal-logo"><svg viewBox="0 0 24 24"><path d="M21.5 12.5c0-1.5-1-2.5-2.5-2.5h-4l-2-3h-2l-2 3H5c-1.5 0-2.5 1-2.5 2.5v6c0 1.5 1 2.5 2.5 2.5h14c1.5 0 2.5-1 2.5-2.5v-6z" fill="white"/></svg></div>
       <h2 id="modalTitle">تسجيل الدخول</h2>
       <p id="modalSubtitle">مرحباً بك في Sufi GAMES</p>
     </div>
@@ -1195,9 +344,7 @@
         <input type="password" id="authPassword" placeholder="••••••••" required minlength="6">
       </div>
       <a class="forgot-link" id="forgotLink" onclick="handleForgotPassword()">نسيت كلمة المرور؟</a>
-      <button type="submit" class="submit-btn" id="submitBtn">
-        <span id="submitText">تسجيل الدخول</span>
-      </button>
+      <button type="submit" class="submit-btn" id="submitBtn"><span id="submitText">تسجيل الدخول</span></button>
     </form>
     <div class="modal-switch">
       <span id="switchText">ليس لديك حساب؟</span>
@@ -1206,1085 +353,668 @@
   </div>
 </div>
 
-<!-- ===== TOAST ===== -->
+<!-- Game Details Modal -->
+<div class="game-modal-overlay" id="gameModal">
+  <div class="game-modal">
+    <button class="game-modal-close" onclick="closeGameModal()">✕</button>
+    <div class="game-modal-hero">
+      <img id="gameModalImage" src="" alt="game">
+      <div class="game-modal-hero-content">
+        <h1 class="game-modal-title" id="gameModalTitle">اسم اللعبة</h1>
+        <div class="game-modal-badges" id="gameModalBadges"></div>
+      </div>
+    </div>
+    <div class="game-modal-body">
+      <div class="game-modal-section">
+        <h3><span class="icon">📖</span> عن اللعبة</h3>
+        <div class="game-modal-description" id="gameModalDescription"></div>
+        <div class="game-features" id="gameModalFeatures"></div>
+      </div>
+      <div class="game-modal-section">
+        <h3><span class="icon">⬇️</span> روابط التحميل</h3>
+        <div class="download-note">
+          ⚠️ <span id="gameModalNote">ملاحظة</span>
+        </div>
+        <div class="download-list" id="gameModalDownloads"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Save Data Modal -->
+<div class="game-modal-overlay" id="saveDataModal">
+  <div class="game-modal">
+    <button class="game-modal-close" onclick="closeSaveDataModal()">✕</button>
+    <div class="game-modal-hero" style="height: 250px; background: linear-gradient(135deg, #8a2be2, #00b4ff);">
+      <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2; text-align: center;">
+        <svg style="width: 80px; height: 80px; fill: white; margin-bottom: 10px;" viewBox="0 0 24 24"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
+        <div style="color: white; font-size: 14px; font-weight: 700;">ملف حفظ</div>
+      </div>
+      <div class="game-modal-hero-content">
+        <h1 class="game-modal-title" id="saveModalTitle">اسم ملف الحفظ</h1>
+        <div class="game-modal-badges" id="saveModalBadges"></div>
+      </div>
+    </div>
+    <div class="game-modal-body">
+      <div class="save-info-grid" id="saveInfoGrid"></div>
+      <div class="game-modal-section">
+        <h3><span class="icon">✨</span> مميزات ملف الحفظ</h3>
+        <div class="game-features" id="saveModalFeatures"></div>
+      </div>
+      <div class="game-modal-section">
+        <h3><span class="icon">🔐</span> كلمة المرور</h3>
+        <div class="password-box">
+          <div>
+            <div class="password-label">باسورد فك الضغط:</div>
+            <div class="password-value" id="saveModalPassword">----</div>
+          </div>
+          <button class="copy-btn" onclick="copyPassword()">📋 نسخ</button>
+        </div>
+      </div>
+      <div class="game-modal-section">
+        <h3><span class="icon">⬇️</span> روابط التحميل</h3>
+        <div class="download-list" id="saveModalDownloads"></div>
+      </div>
+      <div class="game-modal-section">
+        <h3><span class="icon">📌</span> ملاحظات مهمة</h3>
+        <div class="notes-box" id="saveModalNotes"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
-<!-- ===== PAGE: HOME ===== -->
+<!-- الصفحة الرئيسية -->
 <div id="page-home" class="page active">
-  <section class="hero">
-    <h1>مرحباً بك في Sufi GAMES</h1>
-    <p>وجهتك الأولى لألعاب البلايستيشن، السيف داتا، المودات، الأدوات والتطبيقات. كل ما تحتاجه في مكان واحد.</p>
-  </section>
+  <section class="hero"><h1>مرحباً بك في Sufi GAMES</h1><p>وجهتك الأولى لألعاب البلايستيشن، السيف داتا، المودات، الأدوات والتطبيقات.</p></section>
   <section class="sections-container" id="sections">
     <h2 class="section-title">أقسام الموقع</h2>
     <div class="sections-grid">
-      <div class="section-card" onclick="showPage('games')">
-        <div class="card-icon icon-playstation">
-          <svg viewBox="0 0 24 24"><path d="M8.984 2.599v17.547l3.915 1.261c1.74.467 2.549.148 2.549-1.41 0-1.609-.899-2.156-2.655-2.824-1.96-.745-2.405-.977-4.266-1.818 2.674-1.303 6.107-2.685 6.107-2.685V8.335s-3.04 1.255-5.65 2.532V6.852c4.494-1.996 7.797-3.05 9.15-2.599 1.354.451 1.563 1.854 1.563 3.632 0 3.554-1.96 5.298-4.16 6.503v2.601c3.74-1.177 6.41-3.825 6.41-8.225 0-3.722-1.71-5.558-4.61-5.863C14.88 2.535 12.06 3.87 8.984 2.599z"/></svg>
-        </div>
-        <h3>ألعاب بلايستيشن</h3>
-        <p>أحدث ألعاب PlayStation بجميع إصداراتها</p>
+      <div class="section-card" data-section="ps_games" onclick="handleSectionClick('ps_games', 'games')">
+        <div class="disabled-overlay"><svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z"/></svg><span>القسم معطل</span></div>
+        <div class="card-icon icon-playstation"><svg viewBox="0 0 24 24"><path d="M8.984 2.599v17.547l3.915 1.261c1.74.467 2.549.148 2.549-1.41z"/></svg></div>
+        <h3>ألعاب بلايستيشن</h3><p>أحدث ألعاب PlayStation بجميع إصداراتها</p>
         <span class="arrow-badge">استكشف الأقسام ←</span>
       </div>
-      <div class="section-card">
-        <div class="card-icon icon-savedata">
-          <svg viewBox="0 0 24 24"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
-        </div>
-        <h3>سيف داتا</h3>
-        <p>ملفات الحفظ الجاهزة لجميع الألعاب</p>
+      <div class="section-card" data-section="save_data" onclick="handleSectionClick('save_data', 'savedata')">
+        <div class="disabled-overlay"><svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z"/></svg><span>القسم معطل</span></div>
+        <div class="card-icon icon-savedata"><svg viewBox="0 0 24 24"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4z"/></svg></div>
+        <h3>سيف داتا</h3><p>ملفات الحفظ الجاهزة لجميع الألعاب</p>
+        <span class="arrow-badge">استكشف الملفات ←</span>
+      </div>
+      <div class="section-card" data-section="mods" onclick="handleSectionClick('mods', null)">
+        <div class="disabled-overlay"><svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z"/></svg><span>القسم معطل</span></div>
+        <div class="card-icon icon-mods"><svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg></div>
+        <h3>مودات</h3><p>تعديلات وتحسينات حصرية للألعاب</p>
         <span class="empty-badge">القسم فارغ حالياً</span>
       </div>
-      <div class="section-card">
-        <div class="card-icon icon-mods">
-          <svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
-        </div>
-        <h3>مودات</h3>
-        <p>تعديلات وتحسينات حصرية للألعاب</p>
+      <div class="section-card" data-section="tools" onclick="handleSectionClick('tools', null)">
+        <div class="disabled-overlay"><svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z"/></svg><span>القسم معطل</span></div>
+        <div class="card-icon icon-tools"><svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg></div>
+        <h3>أدوات</h3><p>أدوات مساعدة ومفيدة للاعبين</p>
         <span class="empty-badge">القسم فارغ حالياً</span>
       </div>
-      <div class="section-card">
-        <div class="card-icon icon-tools">
-          <svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4zM14.5 6.5l3 3-2 2-3-3 2-2z"/></svg>
-        </div>
-        <h3>أدوات</h3>
-        <p>أدوات مساعدة ومفيدة للاعبين</p>
-        <span class="empty-badge">القسم فارغ حالياً</span>
-      </div>
-      <div class="section-card">
-        <div class="card-icon icon-apps">
-          <svg viewBox="0 0 24 24"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></svg>
-        </div>
-        <h3>تطبيقات</h3>
-        <p>تطبيقات مفيدة لمجتمع الألعاب</p>
+      <div class="section-card" data-section="apps" onclick="handleSectionClick('apps', null)">
+        <div class="disabled-overlay"><svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z"/></svg><span>القسم معطل</span></div>
+        <div class="card-icon icon-apps"><svg viewBox="0 0 24 24"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4z"/></svg></div>
+        <h3>تطبيقات</h3><p>تطبيقات مفيدة لمجتمع الألعاب</p>
         <span class="empty-badge">القسم فارغ حالياً</span>
       </div>
     </div>
   </section>
 </div>
 
-<!-- ===== PAGE: GAMES ===== -->
+<!-- صفحة ألعاب بلايستيشن -->
 <div id="page-games" class="page">
-  <div class="breadcrumb">
-    <span class="breadcrumb-item" onclick="showPage('home')">🏠 الرئيسية</span>
-    <span class="breadcrumb-separator">›</span>
-    <span class="breadcrumb-item active">ألعاب بلايستيشن</span>
-  </div>
-  <section class="sub-hero">
-    <h1>ألعاب بلايستيشن</h1>
-    <p>اختر جهازك المفضل واستعرض مكتبة الألعاب الضخمة</p>
-  </section>
+  <div class="breadcrumb"><span class="breadcrumb-item" onclick="showPage('home')">🏠 الرئيسية</span><span class="breadcrumb-separator">›</span><span class="breadcrumb-item active">ألعاب بلايستيشن</span></div>
+  <section class="sub-hero"><h1>ألعاب بلايستيشن</h1><p>اختر جهازك المفضل</p></section>
   <section class="sections-container">
     <button class="back-btn" onclick="showPage('home')">→ العودة للرئيسية</button>
     <div class="sections-grid">
-      <div class="section-card" onclick="showPage('ps5')">
-        <div class="card-icon icon-ps5">
-          <svg viewBox="0 0 24 24"><path d="M8.984 2.599v17.547l3.915 1.261c1.74.467 2.549.148 2.549-1.41 0-1.609-.899-2.156-2.655-2.824-1.96-.745-2.405-.977-4.266-1.818 2.674-1.303 6.107-2.685 6.107-2.685V8.335s-3.04 1.255-5.65 2.532V6.852c4.494-1.996 7.797-3.05 9.15-2.599 1.354.451 1.563 1.854 1.563 3.632 0 3.554-1.96 5.298-4.16 6.503v2.601c3.74-1.177 6.41-3.825 6.41-8.225 0-3.722-1.71-5.558-4.61-5.863C14.88 2.535 12.06 3.87 8.984 2.599z"/></svg>
-        </div>
-        <h3>PS5</h3>
-        <p>ألعاب الجيل الجديد من PlayStation 5</p>
-        <span class="arrow-badge">استكشف الألعاب ←</span>
+      <div class="section-card" data-subsection="ps5" onclick="handleSubsectionClick('ps5')">
+        <div class="disabled-overlay"><svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z"/></svg><span>القسم معطل</span></div>
+        <div class="card-icon icon-ps5"><svg viewBox="0 0 24 24"><path d="M8.984 2.599v17.547l3.915 1.261c1.74.467 2.549.148 2.549-1.41z"/></svg></div>
+        <h3>PS5</h3><p>ألعاب الجيل الجديد</p><span class="arrow-badge">استكشف ←</span>
       </div>
-      <div class="section-card" onclick="showPage('ps4')">
-        <div class="card-icon icon-ps4">
-          <svg viewBox="0 0 24 24"><path d="M8.984 2.599v17.547l3.915 1.261c1.74.467 2.549.148 2.549-1.41 0-1.609-.899-2.156-2.655-2.824-1.96-.745-2.405-.977-4.266-1.818 2.674-1.303 6.107-2.685 6.107-2.685V8.335s-3.04 1.255-5.65 2.532V6.852c4.494-1.996 7.797-3.05 9.15-2.599 1.354.451 1.563 1.854 1.563 3.632 0 3.554-1.96 5.298-4.16 6.503v2.601c3.74-1.177 6.41-3.825 6.41-8.225 0-3.722-1.71-5.558-4.61-5.863C14.88 2.535 12.06 3.87 8.984 2.599z"/></svg>
-        </div>
-        <h3>PS4</h3>
-        <p>ألعاب PlayStation 4 الكلاسيكية والحديثة</p>
-        <span class="arrow-badge">استكشف الألعاب ←</span>
+      <div class="section-card" data-subsection="ps4" onclick="handleSubsectionClick('ps4')">
+        <div class="disabled-overlay"><svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z"/></svg><span>القسم معطل</span></div>
+        <div class="card-icon icon-ps4"><svg viewBox="0 0 24 24"><path d="M8.984 2.599v17.547l3.915 1.261c1.74.467 2.549.148 2.549-1.41z"/></svg></div>
+        <h3>PS4</h3><p>ألعاب PlayStation 4</p><span class="arrow-badge">استكشف ←</span>
       </div>
-      <div class="section-card" onclick="showPage('ps2')">
-        <div class="card-icon icon-ps2">
-          <svg viewBox="0 0 24 24"><path d="M8.984 2.599v17.547l3.915 1.261c1.74.467 2.549.148 2.549-1.41 0-1.609-.899-2.156-2.655-2.824-1.96-.745-2.405-.977-4.266-1.818 2.674-1.303 6.107-2.685 6.107-2.685V8.335s-3.04 1.255-5.65 2.532V6.852c4.494-1.996 7.797-3.05 9.15-2.599 1.354.451 1.563 1.854 1.563 3.632 0 3.554-1.96 5.298-4.16 6.503v2.601c3.74-1.177 6.41-3.825 6.41-8.225 0-3.722-1.71-5.558-4.61-5.863C14.88 2.535 12.06 3.87 8.984 2.599z"/></svg>
-        </div>
-        <h3>PS2</h3>
-        <p>ألعاب الذكريات من PlayStation 2</p>
-        <span class="arrow-badge">استكشف الألعاب ←</span>
+      <div class="section-card" data-subsection="ps2" onclick="handleSubsectionClick('ps2')">
+        <div class="disabled-overlay"><svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z"/></svg><span>القسم معطل</span></div>
+        <div class="card-icon icon-ps2"><svg viewBox="0 0 24 24"><path d="M8.984 2.599v17.547l3.915 1.261c1.74.467 2.549.148 2.549-1.41z"/></svg></div>
+        <h3>PS2</h3><p>ألعاب الذكريات</p><span class="arrow-badge">استكشف ←</span>
       </div>
-      <div class="section-card" onclick="showPage('arabic')">
-        <div class="card-icon icon-arabic">
-          <svg viewBox="0 0 24 24"><path d="M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg>
-        </div>
-        <h3>Arabic Games</h3>
-        <p>ألعاب مترجمة ومعرّبة بالكامل</p>
-        <span class="arrow-badge">استكشف الألعاب ←</span>
+      <div class="section-card" data-subsection="arabic" onclick="handleSubsectionClick('arabic')">
+        <div class="disabled-overlay"><svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z"/></svg><span>القسم معطل</span></div>
+        <div class="card-icon icon-arabic"><svg viewBox="0 0 24 24"><path d="M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17z"/></svg></div>
+        <h3>Arabic Games</h3><p>ألعاب مترجمة ومعرّبة</p><span class="arrow-badge">استكشف ←</span>
       </div>
     </div>
   </section>
 </div>
 
-<!-- ===== PLATFORM PAGES ===== -->
-<div id="page-ps5" class="page">
-  <div class="breadcrumb">
-    <span class="breadcrumb-item" onclick="showPage('home')">🏠 الرئيسية</span>
-    <span class="breadcrumb-separator">›</span>
-    <span class="breadcrumb-item" onclick="showPage('games')">ألعاب بلايستيشن</span>
-    <span class="breadcrumb-separator">›</span>
-    <span class="breadcrumb-item active">PS5</span>
-  </div>
-  <section class="sub-hero"><h1>PS5</h1><p>ألعاب الجيل الجديد من PlayStation 5</p></section>
-  <section class="sections-container">
-    <button class="back-btn" onclick="showPage('games')">→ العودة لألعاب بلايستيشن</button>
-    <div id="games-ps5-container"><!-- يتم تحميل الألعاب هنا --></div>
-  </section>
-</div>
+<div id="page-ps5" class="page"><div class="breadcrumb"><span class="breadcrumb-item" onclick="showPage('home')">🏠</span><span class="breadcrumb-separator">›</span><span class="breadcrumb-item" onclick="showPage('games')">ألعاب بلايستيشن</span><span class="breadcrumb-separator">›</span><span class="breadcrumb-item active">PS5</span></div><section class="sub-hero"><h1>PS5</h1></section><section class="sections-container"><button class="back-btn" onclick="showPage('games')">→ العودة</button><div class="empty-state"><div class="empty-state-icon"><svg viewBox="0 0 24 24"><path d="M20 6h-8l-2-2H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2z"/></svg></div><h2>القسم فارغ حالياً</h2><p>لم يتم إضافة أي ألعاب PS5 بعد</p><button class="notify-btn" onclick="showToast('سنُعلمك عند الإضافة!', 'success')">🔔 أعلمني</button></div></section></div>
 
-<div id="page-ps4" class="page">
-  <div class="breadcrumb">
-    <span class="breadcrumb-item" onclick="showPage('home')">🏠 الرئيسية</span>
-    <span class="breadcrumb-separator">›</span>
-    <span class="breadcrumb-item" onclick="showPage('games')">ألعاب بلايستيشن</span>
-    <span class="breadcrumb-separator">›</span>
-    <span class="breadcrumb-item active">PS4</span>
-  </div>
-  <section class="sub-hero"><h1>PS4</h1><p>ألعاب PlayStation 4 الكلاسيكية والحديثة</p></section>
-  <section class="sections-container">
-    <button class="back-btn" onclick="showPage('games')">→ العودة لألعاب بلايستيشن</button>
-    <div id="games-ps4-container"></div>
-  </section>
-</div>
+<div id="page-ps4" class="page"><div class="breadcrumb"><span class="breadcrumb-item" onclick="showPage('home')">🏠</span><span class="breadcrumb-separator">›</span><span class="breadcrumb-item" onclick="showPage('games')">ألعاب بلايستيشن</span><span class="breadcrumb-separator">›</span><span class="breadcrumb-item active">PS4</span></div><section class="sub-hero"><h1>PS4</h1></section><section class="sections-container"><button class="back-btn" onclick="showPage('games')">→ العودة</button><div class="empty-state"><div class="empty-state-icon"><svg viewBox="0 0 24 24"><path d="M20 6h-8l-2-2H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2z"/></svg></div><h2>القسم فارغ حالياً</h2><p>لم يتم إضافة أي ألعاب PS4 بعد</p><button class="notify-btn" onclick="showToast('سنُعلمك عند الإضافة!', 'success')">🔔 أعلمني</button></div></section></div>
 
-<div id="page-ps2" class="page">
-  <div class="breadcrumb">
-    <span class="breadcrumb-item" onclick="showPage('home')">🏠 الرئيسية</span>
-    <span class="breadcrumb-separator">›</span>
-    <span class="breadcrumb-item" onclick="showPage('games')">ألعاب بلايستيشن</span>
-    <span class="breadcrumb-separator">›</span>
-    <span class="breadcrumb-item active">PS2</span>
-  </div>
-  <section class="sub-hero"><h1>PS2</h1><p>ألعاب الذكريات من PlayStation 2</p></section>
-  <section class="sections-container">
-    <button class="back-btn" onclick="showPage('games')">→ العودة لألعاب بلايستيشن</button>
-    <div id="games-ps2-container"></div>
-  </section>
-</div>
+<div id="page-ps2" class="page"><div class="breadcrumb"><span class="breadcrumb-item" onclick="showPage('home')">🏠</span><span class="breadcrumb-separator">›</span><span class="breadcrumb-item" onclick="showPage('games')">ألعاب بلايستيشن</span><span class="breadcrumb-separator">›</span><span class="breadcrumb-item active">PS2</span></div><section class="sub-hero"><h1>PS2</h1></section><section class="sections-container"><button class="back-btn" onclick="showPage('games')">→ العودة</button><div class="empty-state"><div class="empty-state-icon"><svg viewBox="0 0 24 24"><path d="M20 6h-8l-2-2H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2z"/></svg></div><h2>القسم فارغ حالياً</h2><p>لم يتم إضافة أي ألعاب PS2 بعد</p><button class="notify-btn" onclick="showToast('سنُعلمك عند الإضافة!', 'success')">🔔 أعلمني</button></div></section></div>
 
 <div id="page-arabic" class="page">
-  <div class="breadcrumb">
-    <span class="breadcrumb-item" onclick="showPage('home')">🏠 الرئيسية</span>
-    <span class="breadcrumb-separator">›</span>
-    <span class="breadcrumb-item" onclick="showPage('games')">ألعاب بلايستيشن</span>
-    <span class="breadcrumb-separator">›</span>
-    <span class="breadcrumb-item active">Arabic Games</span>
-  </div>
+  <div class="breadcrumb"><span class="breadcrumb-item" onclick="showPage('home')">🏠 الرئيسية</span><span class="breadcrumb-separator">›</span><span class="breadcrumb-item" onclick="showPage('games')">ألعاب بلايستيشن</span><span class="breadcrumb-separator">›</span><span class="breadcrumb-item active">Arabic Games</span></div>
   <section class="sub-hero"><h1>Arabic Games</h1><p>ألعاب مترجمة ومعرّبة بالكامل</p></section>
   <section class="sections-container">
     <button class="back-btn" onclick="showPage('games')">→ العودة لألعاب بلايستيشن</button>
-    <div id="games-arabic-container"></div>
+    <div class="games-list" id="arabicGamesList"></div>
   </section>
 </div>
 
-<!-- ===== PAGE: ADMIN PANEL ===== -->
-<div id="page-admin" class="page">
-  <div class="breadcrumb">
-    <span class="breadcrumb-item" onclick="showPage('home')">🏠 الرئيسية</span>
-    <span class="breadcrumb-separator">›</span>
-    <span class="breadcrumb-item active">⚙️ لوحة التحكم</span>
-  </div>
-  
+<div id="page-savedata" class="page">
+  <div class="breadcrumb"><span class="breadcrumb-item" onclick="showPage('home')">🏠 الرئيسية</span><span class="breadcrumb-separator">›</span><span class="breadcrumb-item active">سيف داتا</span></div>
+  <section class="sub-hero">
+    <h1>سيف داتا</h1>
+    <p>ملفات حفظ جاهزة ومختبرة شخصياً - وفّر وقتك واستمتع باللعب 💾</p>
+  </section>
   <section class="sections-container">
-    <div class="admin-layout">
-      <!-- Sidebar -->
-      <aside class="admin-sidebar">
-        <div class="admin-profile">
-          <div class="avatar" id="adminAvatar">A</div>
-          <h4 id="adminName">المشرف</h4>
-          <p id="adminEmail">admin@site.com</p>
-        </div>
-        <ul class="admin-menu">
-          <li class="active" onclick="switchAdminTab('dashboard')" data-tab="dashboard">
-            📊 لوحة المعلومات
-          </li>
-          <li onclick="switchAdminTab('games')" data-tab="games">
-            🎮 إدارة الألعاب
-            <span class="badge" id="gamesCount">0</span>
-          </li>
-          <li onclick="switchAdminTab('users')" data-tab="users">
-            👥 المستخدمين
-            <span class="badge" id="usersCount">0</span>
-          </li>
-          <li onclick="switchAdminTab('add')" data-tab="add">
-            ➕ إضافة لعبة جديدة
-          </li>
-        </ul>
-      </aside>
-
-      <!-- Content -->
-      <div class="admin-content">
-        <!-- Dashboard Tab -->
-        <div id="admin-dashboard" class="admin-tab">
-          <h2 style="margin-bottom:25px;">📊 لوحة المعلومات</h2>
-          <div class="admin-stats">
-            <div class="stat-card">
-              <div class="number" id="statGames">0</div>
-              <div class="label">إجمالي الألعاب</div>
-            </div>
-            <div class="stat-card">
-              <div class="number" id="statUsers">0</div>
-              <div class="label">المستخدمين المسجلين</div>
-            </div>
-            <div class="stat-card">
-              <div class="number" id="statAdmins">0</div>
-              <div class="label">المشرفين</div>
-            </div>
-            <div class="stat-card">
-              <div class="number" id="statPlatforms">4</div>
-              <div class="label">المنصات</div>
-            </div>
-          </div>
-          <div style="background:rgba(20,20,35,0.4);border-radius:15px;padding:20px;text-align:center;border:1px solid rgba(138,43,226,0.2);">
-            <p style="color:#888;">📈 آخر النشاطات ستظهر هنا قريباً</p>
-          </div>
-        </div>
-
-        <!-- Games Management Tab -->
-        <div id="admin-games" class="admin-tab" style="display:none;">
-          <h2 style="margin-bottom:25px;">🎮 إدارة الألعاب</h2>
-          <div class="admin-toolbar">
-            <input type="text" id="searchGames" placeholder="🔍 بحث عن لعبة..." oninput="renderAdminGames()">
-            <select id="filterPlatform" onchange="renderAdminGames()">
-              <option value="all">جميع المنصات</option>
-              <option value="ps5">PS5</option>
-              <option value="ps4">PS4</option>
-              <option value="ps2">PS2</option>
-              <option value="arabic">Arabic</option>
-            </select>
-            <button class="add-btn" onclick="openAddGameModal()">➕ إضافة لعبة</button>
-          </div>
-          <div style="overflow-x:auto;">
-            <table class="admin-table" id="gamesTable">
-              <thead>
-                <tr>
-                  <th>الصورة</th>
-                  <th>الاسم</th>
-                  <th>المنصة</th>
-                  <th>الوصف</th>
-                  <th>الإجراءات</th>
-                </tr>
-              </thead>
-              <tbody id="gamesTableBody">
-                <!-- يتم تعبئتها بواسطة JavaScript -->
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- Users Management Tab -->
-        <div id="admin-users" class="admin-tab" style="display:none;">
-          <h2 style="margin-bottom:25px;">👥 إدارة المستخدمين</h2>
-          <div style="overflow-x:auto;">
-            <table class="admin-table">
-              <thead>
-                <tr>
-                  <th>المستخدم</th>
-                  <th>البريد الإلكتروني</th>
-                  <th>الدور</th>
-                  <th>تاريخ التسجيل</th>
-                  <th>الإجراءات</th>
-                </tr>
-              </thead>
-              <tbody id="usersTableBody">
-                <!-- يتم تعبئتها بواسطة JavaScript -->
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- Add Game Tab -->
-        <div id="admin-add" class="admin-tab" style="display:none;">
-          <h2 style="margin-bottom:25px;">➕ إضافة لعبة جديدة</h2>
-          <form id="addGameForm" onsubmit="handleAddGame(event)" style="max-width:600px;">
-            <div class="form-group">
-              <label>اسم اللعبة *</label>
-              <input type="text" id="gameTitle" placeholder="مثل: God of War Ragnarok" required>
-            </div>
-            <div class="form-group">
-              <label>المنصة *</label>
-              <select id="gamePlatform" required>
-                <option value="">اختر المنصة</option>
-                <option value="ps5">PS5</option>
-                <option value="ps4">PS4</option>
-                <option value="ps2">PS2</option>
-                <option value="arabic">Arabic Games</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>رابط صورة اللعبة *</label>
-              <input type="url" id="gameImage" placeholder="https://example.com/image.jpg" required>
-              <div class="image-preview" id="imagePreview"></div>
-            </div>
-            <div class="form-group">
-              <label>رابط التحميل *</label>
-              <input type="url" id="gameDownload" placeholder="https://example.com/download" required>
-            </div>
-            <div class="form-group">
-              <label>وصف اللعبة *</label>
-              <textarea id="gameDescription" placeholder="اكتب وصفاً جميلاً وجذاباً للعبة..." required></textarea>
-            </div>
-            <button type="submit" class="submit-btn">💾 حفظ اللعبة</button>
-          </form>
-        </div>
-      </div>
-    </div>
+    <button class="back-btn" onclick="showPage('home')">→ العودة للرئيسية</button>
+    <div class="games-list" id="saveDataList"></div>
   </section>
-</div>
-
-<!-- ===== EDIT GAME MODAL ===== -->
-<div class="modal-overlay" id="editGameModal">
-  <div class="modal modal-lg">
-    <button class="modal-close" onclick="closeEditModal()">✕</button>
-    <div class="modal-header">
-      <h2>✏️ تعديل اللعبة</h2>
-    </div>
-    <form id="editGameForm" onsubmit="handleEditGame(event)">
-      <input type="hidden" id="editGameId">
-      <div class="form-group">
-        <label>اسم اللعبة *</label>
-        <input type="text" id="editGameTitle" required>
-      </div>
-      <div class="form-group">
-        <label>المنصة *</label>
-        <select id="editGamePlatform" required>
-          <option value="ps5">PS5</option>
-          <option value="ps4">PS4</option>
-          <option value="ps2">PS2</option>
-          <option value="arabic">Arabic Games</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>رابط صورة اللعبة *</label>
-        <input type="url" id="editGameImage" required>
-      </div>
-      <div class="form-group">
-        <label>رابط التحميل *</label>
-        <input type="url" id="editGameDownload" required>
-      </div>
-      <div class="form-group">
-        <label>وصف اللعبة *</label>
-        <textarea id="editGameDescription" required></textarea>
-      </div>
-      <div style="display:flex;gap:10px;">
-        <button type="submit" class="submit-btn" style="flex:1;">💾 تحديث اللعبة</button>
-        <button type="button" class="submit-btn submit-btn-danger" onclick="deleteGameFromModal()" style="flex:0.5;">🗑️ حذف</button>
-      </div>
-    </form>
-  </div>
 </div>
 
 <footer id="contact">
-  <div class="social">
-    <a href="#" title="تيليجرام">✈</a>
-    <a href="#" title="ديسكورد">💬</a>
-    <a href="#" title="تويتر">🐦</a>
-    <a href="#" title="يوتيوب">▶</a>
-  </div>
+  <div class="social"><a href="#">✈</a><a href="#">💬</a><a href="#">🐦</a><a href="#">▶</a></div>
   <p>© 2026 Sufi GAMES - جميع الحقوق محفوظة</p>
 </footer>
 
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
-
 <script>
-  // ========================================================
-  //  FIREBASE CONFIG
-  // ========================================================
-  const firebaseConfig = {
-    apiKey: "AIzaSyBh__m34knQZGVsHx_cVUe1oY4Lf9fe7Vk",
-    authDomain: "hb1-8ef7e.firebaseapp.com",
-    projectId: "hb1-8ef7e",
-    storageBucket: "hb1-8ef7e.firebasestorage.app",
-    messagingSenderId: "48388793481",
-    appId: "1:48388793481:web:6bdaeefd55195356c55258",
-    measurementId: "G-8B19RJV3XW"
-  };
-
-  firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
-  const db = firebase.firestore();
-  const storage = firebase.storage();
-
-  // ========================================================
-  //  STATE
-  // ========================================================
-  let isLoginMode = true;
-  let currentUser = null;
-  let currentUserRole = 'user';
-  let allGames = [];
-  let allUsers = [];
-
-  // ========================================================
-  //  AUTH STATE OBSERVER
-  // ========================================================
-  auth.onAuthStateChanged(async (user) => {
-    if (user) {
-      currentUser = user;
-      await checkUserRole(user);
-      updateUserUI(user);
-      if (currentUserRole === 'admin') {
-        document.getElementById('admin-link').style.display = 'block';
-        loadAdminData();
-      } else {
-        document.getElementById('admin-link').style.display = 'none';
-      }
-    } else {
-      currentUser = null;
-      currentUserRole = 'user';
-      resetUserUI();
-      document.getElementById('admin-link').style.display = 'none';
+  // ===== Arabic Games Data =====
+  const arabicGames = [
+    {
+      id: 'gow-ragnarok',
+      title: 'God of War Ragnarök',
+      titleAr: 'جود أوف وار راغناروك',
+      image: 'https://image.api.playstation.com/vulcan/ap/rnd/202207/1210/4xJ8XB3bi888QTLZYdl7Oi0s.png',
+      platform: 'PS4',
+      region: 'عربي',
+      size: '~85 GB',
+      description: `استعد لرحلة ملحمية مع كريتوس وابنه أتريوس في مغامرة جديدة تستند إلى الأساطير الإسكندنافية. في "God of War Ragnarök"، يواجه الأب والابن نهاية العالم "راغناروك" في مواجهة ملحمية ضد الآلهة الإسكندنافية.\n\n🎮 تتميز هذه النسخة بدعم كامل للغة العربية، حيث ستستمتع بـ:\n• حوارات عربية احترافية ومؤدية بأصوات عربية متميزة\n• قوائم وواجهات مستخدم معرّبة بالكامل\n• ترجمة دقيقة للنصوص والقصص\n• تجربة لعب سلسة بدون أي حواجز لغوية\n\nاستمتع بأحد أفضل ألعاب الأكشن-المغامرات في التاريخ، الآن بلغتك العربية!\n\n⚠️ هذه اللعبة حصرية على PlayStation 4 فقط.`,
+      features: [
+        'حوارات عربية كاملة',
+        'قوائم معرّبة 100%',
+        'ترجمة احترافية',
+        'جودة عالية HD',
+        'حصرية PS4',
+        'تحديثات متوفرة'
+      ],
+      downloads: [
+        { title: 'اللعبة الأساسية', subtitle: 'God of War Ragnarök - Full Game', url: 'https://akirabox.to/gXeGOJMKkzAa/file', icon: '🎮' },
+        { title: 'التحديث', subtitle: 'Update - آخر إصدار', url: 'https://1fichier.com/?xk5z4fpcvo0oidbtkaqf&af=3662447', icon: '🔄' }
+      ],
+      note: 'ملاحظة: اللعبة حصرية على PS4 فقط. تأكد من مطابقة منطقة اللعبة (EU) مع منطقة جهازك.'
     }
-  });
+  ];
 
-  // ========================================================
-  //  CHECK USER ROLE
-  // ========================================================
-  async function checkUserRole(user) {
-  try {
-    const doc = await db.collection('users').doc(user.uid).get();
-    
-    if (doc.exists) {
-      // المستخدم موجود - خذ دوره من Firestore
-      currentUserRole = doc.data().role || 'user';
-      console.log('✅ دور المستخدم:', currentUserRole);
-      
-      // إذا كان المشرف، أظهر رابط لوحة التحكم
-      if (currentUserRole === 'admin') {
-        document.getElementById('admin-link').style.display = 'block';
-      }
-    } else {
-      // مستخدم جديد - أنشئه مع دور user
-      currentUserRole = 'user';
-      await db.collection('users').doc(user.uid).set({
-        email: user.email,
-        displayName: user.displayName || '',
-        role: 'user',
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-      });
-      console.log('✅ تم إنشاء مستخدم جديد مع دور user');
+  // ===== Save Data =====
+  const saveDataFiles = [
+    {
+      id: 'gow-ragnarok-save',
+      title: 'God of War Ragnarök',
+      titleAr: 'جود أوف وار راغناروك - ملف حفظ',
+      platform: 'PS4',
+      version: '5.05',
+      cusa: 'CUSA34390',
+      completion: '76%',
+      author: 'ميراس',
+      password: '4GAMER',
+      description: 'ملف حفظ شخصي للعبة God of War Ragnarök، تم اللعب عليه يدوياً من جهاز شخصي. يحتوي على تقدم كبير في القصة مع فتح معظم المحتوى.',
+      features: [
+        'قصة كاملة 100%',
+        'أغلب المهام الجانبية كاملة',
+        'كل السيوف MAX',
+        'كل المهارات مفتوحة',
+        'فلوس كثيرة',
+        'سكن كريتوس الجزء الأول والثاني'
+      ],
+      downloads: [
+        { title: 'ملف الحفظ الرئيسي', subtitle: 'Save File - CUSA34390', url: 'https://akirabox.com/APVmal0DdGXo/file', icon: '💾' },
+        { title: 'إضافة فالهالا', subtitle: 'Valhalla DLC Save', url: 'https://akirabox.com/5pVzNx4WAm7w/file', icon: '⚔️' }
+      ],
+      notes: [
+        'هذا الملف من جهازه الشخصي ولم يُؤخذ من أي موقع خارجي',
+        'لا يحتاج إلى تفعيل الحساب، يُنقل عن طريق الفلاش',
+        'إذا حاب تشارك ملفات حفظك الشخصية، تواصل ويانا على الخاص'
+      ]
     }
-  } catch (error) {
-    console.error('❌ خطأ في التحقق من الصلاحية:', error);
-    currentUserRole = 'user';
-  }
-  
-  // تحديث واجهة المستخدم
-  updateAdminLink();
-}
+  ];
 
-// دالة لإظهار/إخفاء رابط لوحة التحكم
-function updateAdminLink() {
-  const adminLink = document.getElementById('admin-link');
-  if (currentUserRole === 'admin') {
-    adminLink.style.display = 'block';
-    console.log('✅ لوحة التحكم مفعلة');
-  } else {
-    adminLink.style.display = 'none';
-  }
-}
-
-  // ========================================================
-  //  UI UPDATES
-  // ========================================================
-  function updateUserUI(user) {
-    document.getElementById('loginBtn').style.display = 'none';
-    document.getElementById('userProfile').classList.add('active');
+  // ===== Render Arabic Games =====
+  function renderArabicGames() {
+    const container = document.getElementById('arabicGamesList');
+    if (!container) return;
     
-    const displayName = user.displayName || user.email?.split('@')[0] || 'المستخدم';
-    const avatar = document.getElementById('userAvatar');
-    
-    if (user.photoURL) {
-      avatar.innerHTML = `<img src="${user.photoURL}" alt="avatar">`;
-    } else {
-      avatar.textContent = displayName.charAt(0).toUpperCase();
+    if (arabicGames.length === 0) {
+      container.innerHTML = `<div class="empty-state" style="grid-column: 1/-1;"><div class="empty-state-icon"><svg viewBox="0 0 24 24"><path d="M20 6h-8l-2-2H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2z"/></svg></div><h2>القسم فارغ حالياً</h2><p>لم يتم إضافة أي ألعاب عربية بعد</p><button class="notify-btn" onclick="showToast('سنُعلمك عند الإضافة!', 'success')">🔔 أعلمني</button></div>`;
+      return;
     }
+
+    container.innerHTML = arabicGames.map(game => `
+      <div class="game-card" onclick="openGameModal('${game.id}')">
+        <div class="game-card-image-wrapper">
+          <span class="game-card-badge">${game.region} • ${game.platform}</span>
+          <img class="game-card-image" src="${game.image}" alt="${game.title}" onerror="this.src='https://via.placeholder.com/400x500/1a1a2e/8a2be2?text=God+of+War+Ragnarok'">
+        </div>
+        <div class="game-card-info">
+          <h3 class="game-card-title">${game.titleAr}</h3>
+          <div class="game-card-meta">
+            <span class="meta-tag">${game.platform}</span>
+            <span class="meta-tag">🌐 عربي</span>
+            <span class="meta-tag">💾 ${game.size}</span>
+          </div>
+          <p class="game-card-desc">${game.description.substring(0, 120)}...</p>
+          <div class="game-card-cta"><span>اضغط للتفاصيل والتحميل</span><span>←</span></div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // ===== Render Save Data =====
+  function renderSaveData() {
+    const container = document.getElementById('saveDataList');
+    if (!container) return;
     
-    document.getElementById('userName').textContent = displayName;
-    document.getElementById('dropdownName').textContent = displayName;
-    document.getElementById('dropdownEmail').textContent = user.email || '';
+    if (saveDataFiles.length === 0) {
+      container.innerHTML = `<div class="empty-state" style="grid-column: 1/-1;"><div class="empty-state-icon"><svg viewBox="0 0 24 24"><path d="M20 6h-8l-2-2H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2z"/></svg></div><h2>القسم فارغ حالياً</h2><p>لم يتم إضافة أي ملفات حفظ بعد</p><button class="notify-btn" onclick="showToast('سنُعلمك عند الإضافة!', 'success')">🔔 أعلمني</button></div>`;
+      return;
+    }
+
+    container.innerHTML = saveDataFiles.map(save => `
+      <div class="savedata-card" onclick="openSaveDataModal('${save.id}')">
+        <div class="savedata-image-wrapper">
+          <span class="savedata-badge">${save.platform}</span>
+          <span class="completion-badge">🏆 ${save.completion}</span>
+          <svg viewBox="0 0 24 24"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
+        </div>
+        <div class="savedata-info">
+          <h3 class="savedata-title">${save.titleAr}</h3>
+          <div class="savedata-meta">
+            <span class="meta-tag">🎮 ${save.platform}</span>
+            <span class="meta-tag">📀 ${save.version}</span>
+            <span class="meta-tag">👤 ${save.author}</span>
+          </div>
+          <p class="savedata-desc">${save.description.substring(0, 100)}...</p>
+          <div class="savedata-cta"><span>اضغط للتفاصيل والتحميل</span><span>←</span></div>
+        </div>
+      </div>
+    `).join('');
   }
 
-  function resetUserUI() {
-    document.getElementById('loginBtn').style.display = 'flex';
-    document.getElementById('userProfile').classList.remove('active');
-    document.getElementById('userAvatar').innerHTML = 'U';
-  }
+  // ===== Game Modal =====
+  function openGameModal(gameId) {
+    const game = arabicGames.find(g => g.id === gameId);
+    if (!game) return;
 
-  // ========================================================
-  //  MODAL FUNCTIONS
-  // ========================================================
-  function openModal(mode = 'login') {
-    isLoginMode = (mode === 'login');
-    updateModalMode();
-    document.getElementById('loginModal').classList.add('show');
+    document.getElementById('gameModalImage').src = game.image;
+    document.getElementById('gameModalImage').onerror = function() {
+      this.src = 'https://via.placeholder.com/900x400/1a1a2e/8a2be2?text=God+of+War+Ragnarok';
+    };
+    document.getElementById('gameModalTitle').textContent = `${game.titleAr} - ${game.title}`;
+    
+    document.getElementById('gameModalBadges').innerHTML = `
+      <span class="badge badge-arabic">🌐 عربي كامل</span>
+      <span class="badge badge-ps4">${game.platform} فقط</span>
+      <span class="badge badge-size">💾 ${game.size}</span>
+    `;
+
+    document.getElementById('gameModalDescription').innerHTML = game.description.replace(/\n/g, '<br>');
+    document.getElementById('gameModalFeatures').innerHTML = game.features.map(f => `<div class="feature-item"><span class="check">✓</span><span>${f}</span></div>`).join('');
+    document.getElementById('gameModalNote').textContent = game.note;
+    
+    // ===== روابط تحميل مباشرة (زر = رابط) =====
+    document.getElementById('gameModalDownloads').innerHTML = game.downloads.map((d, idx) => `
+      <div class="download-item">
+        <div class="download-info">
+          <div class="download-title"><span>${d.icon}</span><span>${d.title}</span></div>
+          <div class="download-subtitle">${d.subtitle}</div>
+        </div>
+        <a class="download-btn" href="${d.url}" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24">
+            <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+          </svg>
+          تحميل
+        </a>
+      </div>
+    `).join('');
+
+    document.getElementById('gameModal').classList.add('show');
     document.body.style.overflow = 'hidden';
   }
 
-  function closeModal() {
+  function closeGameModal() {
+    document.getElementById('gameModal').classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('gameModal').addEventListener('click', (e) => {
+    if (e.target.id === 'gameModal') closeGameModal();
+  });
+
+  // ===== Save Data Modal =====
+  function openSaveDataModal(saveId) {
+    const save = saveDataFiles.find(s => s.id === saveId);
+    if (!save) return;
+
+    document.getElementById('saveModalTitle').textContent = save.titleAr;
+    
+    document.getElementById('saveModalBadges').innerHTML = `
+      <span class="badge badge-save">💾 سيف داتا</span>
+      <span class="badge badge-ps4">${save.platform}</span>
+      <span class="badge badge-completion">🏆 ${save.completion}</span>
+      <span class="badge badge-version">📀 ${save.version}</span>
+    `;
+
+    document.getElementById('saveInfoGrid').innerHTML = `
+      <div class="save-info-item">
+        <div class="save-info-label">النسخة (CUSA)</div>
+        <div class="save-info-value">${save.cusa}</div>
+      </div>
+      <div class="save-info-item">
+        <div class="save-info-label">الإصدار (Firmware)</div>
+        <div class="save-info-value">${save.version}</div>
+      </div>
+      <div class="save-info-item">
+        <div class="save-info-label">نسبة الإكمال</div>
+        <div class="save-info-value" style="color: #ffaa00;">🏆 ${save.completion}</div>
+      </div>
+      <div class="save-info-item">
+        <div class="save-info-label">صاحب الملف</div>
+        <div class="save-info-value">👤 ${save.author}</div>
+      </div>
+    `;
+
+    document.getElementById('saveModalFeatures').innerHTML = save.features.map(f => `<div class="feature-item"><span class="check">✓</span><span>${f}</span></div>`).join('');
+    document.getElementById('saveModalPassword').textContent = save.password;
+    
+    // ===== روابط تحميل مباشرة (زر = رابط) =====
+    document.getElementById('saveModalDownloads').innerHTML = save.downloads.map((d, idx) => `
+      <div class="download-item">
+        <div class="download-info">
+          <div class="download-title"><span>${d.icon}</span><span>${d.title}</span></div>
+          <div class="download-subtitle">${d.subtitle}</div>
+        </div>
+        <a class="download-btn" href="${d.url}" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24">
+            <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+          </svg>
+          تحميل
+        </a>
+      </div>
+    `).join('');
+    
+    document.getElementById('saveModalNotes').innerHTML = `<h4>📌 ملاحظات:</h4><ul>${save.notes.map(n => `<li>${n}</li>`).join('')}</ul>`;
+
+    document.getElementById('saveDataModal').classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSaveDataModal() {
+    document.getElementById('saveDataModal').classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('saveDataModal').addEventListener('click', (e) => {
+    if (e.target.id === 'saveDataModal') closeSaveDataModal();
+  });
+
+  function copyPassword() {
+    const pwd = document.getElementById('saveModalPassword').textContent;
+    navigator.clipboard.writeText(pwd).then(() => {
+      showToast('✅ تم نسخ الباسورد: ' + pwd, 'success');
+    }).catch(() => {
+      showToast('الباسورد: ' + pwd, 'success');
+    });
+  }
+
+  // ===== Site Settings =====
+  const defaultSettings = {
+    siteEnabled: true,
+    maintenanceMessage: 'شكراً لصبرك وتفهمك 💜',
+    sections: { ps_games: true, save_data: true, mods: true, tools: true, apps: true },
+    subSections: { ps5: true, ps4: true, ps2: true, arabic: true }
+  };
+
+  let currentSettings = { ...defaultSettings };
+
+  try {
+    if (typeof firebase !== 'undefined') {
+      const firebaseConfig = {
+        apiKey: "AIzaSyBh__m34knQZGVsHx_cVUe1oY4Lf9fe7Vk",
+        authDomain: "hb1-8ef7e.firebaseapp.com",
+        projectId: "hb1-8ef7e",
+        storageBucket: "hb1-8ef7e.firebasestorage.app",
+        messagingSenderId: "48388793481",
+        appId: "1:48388793481:web:6bdaeefd55195356c55258",
+        measurementId: "G-8B19RJV3XW"
+      };
+      firebase.initializeApp(firebaseConfig);
+      const auth = firebase.auth();
+      const db = firebase.firestore();
+
+      db.collection('siteSettings').doc('main').onSnapshot((doc) => {
+        if (doc.exists) {
+          const data = doc.data();
+          currentSettings = {
+            ...defaultSettings,
+            ...data,
+            sections: { ...defaultSettings.sections, ...(data.sections || {}) },
+            subSections: { ...defaultSettings.subSections, ...(data.subSections || {}) }
+          };
+        }
+        applySettings();
+      }, (error) => {
+        console.error('Firebase error:', error);
+        applySettings();
+      });
+
+      let isLoginMode = true;
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          document.getElementById('loginBtn').style.display = 'none';
+          document.getElementById('userProfile').classList.add('active');
+          const name = user.displayName || user.email?.split('@')[0] || 'المستخدم';
+          const avatar = document.getElementById('userAvatar');
+          avatar.innerHTML = user.photoURL ? `<img src="${user.photoURL}">` : name.charAt(0).toUpperCase();
+          document.getElementById('userName').textContent = name;
+        } else {
+          document.getElementById('loginBtn').style.display = 'flex';
+          document.getElementById('userProfile').classList.remove('active');
+        }
+      });
+
+      window.signInWithGoogle = async function() {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        const btn = document.querySelector('.google-btn');
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<span class="spinner"></span> جاري الاتصال...';
+        btn.disabled = true;
+        try {
+          await auth.signInWithPopup(provider);
+          closeModal();
+        } catch (e) {
+          if (e.code !== 'auth/popup-closed-by-user') showAlert(translateError(e.code), 'error');
+        } finally {
+          btn.innerHTML = orig;
+          btn.disabled = false;
+        }
+      };
+
+      window.handleEmailAuth = async function(e) {
+        e.preventDefault();
+        hideAlert();
+        const email = document.getElementById('authEmail').value.trim();
+        const password = document.getElementById('authPassword').value;
+        const name = document.getElementById('authName').value.trim();
+        const btn = document.getElementById('submitBtn');
+        const txt = document.getElementById('submitText');
+        const orig = txt.textContent;
+        btn.disabled = true;
+        txt.innerHTML = '<span class="spinner"></span>';
+        try {
+          if (isLoginMode) {
+            await auth.signInWithEmailAndPassword(email, password);
+            showToast('تم تسجيل الدخول 🎉', 'success');
+          } else {
+            const cred = await auth.createUserWithEmailAndPassword(email, password);
+            if (name) await cred.user.updateProfile({ displayName: name });
+            showToast('تم إنشاء الحساب 🎉', 'success');
+          }
+          closeModal();
+        } catch (err) {
+          showAlert(translateError(err.code), 'error');
+        } finally {
+          btn.disabled = false;
+          txt.textContent = orig;
+        }
+      };
+
+      window.handleForgotPassword = async function() {
+        const email = document.getElementById('authEmail').value.trim();
+        if (!email) { showAlert('أدخل بريدك أولاً', 'error'); return; }
+        try {
+          await auth.sendPasswordResetEmail(email);
+          showAlert('تم إرسال الرابط ✅', 'success');
+        } catch (err) { showAlert(translateError(err.code), 'error'); }
+      };
+
+      window.signOutUser = async function() {
+        await auth.signOut();
+        document.getElementById('userDropdown').classList.remove('show');
+        showToast('تم تسجيل الخروج 👋', 'success');
+      };
+    }
+  } catch (e) {
+    console.error('Firebase init error:', e);
+  }
+
+  function applySettings() {
+    const maintenanceScreen = document.getElementById('maintenanceScreen');
+    const mainHeader = document.getElementById('mainHeader');
+    const pages = document.querySelectorAll('.page');
+
+    if (!currentSettings.siteEnabled) {
+      if (maintenanceScreen) maintenanceScreen.classList.add('show');
+      if (mainHeader) mainHeader.style.display = 'none';
+      if (pages) pages.forEach(p => p.style.display = 'none');
+      const msg = document.getElementById('maintenanceMessage');
+      if (msg) msg.textContent = currentSettings.maintenanceMessage || 'الموقع تحت الصيانة';
+    } else {
+      if (maintenanceScreen) maintenanceScreen.classList.remove('show');
+      if (mainHeader) mainHeader.style.display = '';
+      if (pages) pages.forEach(p => { if (p.classList.contains('active')) p.style.display = 'block'; });
+    }
+
+    document.querySelectorAll('.section-card[data-section]').forEach(card => {
+      const key = card.dataset.section;
+      if (currentSettings.sections[key] === false) card.classList.add('disabled');
+      else card.classList.remove('disabled');
+    });
+
+    document.querySelectorAll('.section-card[data-subsection]').forEach(card => {
+      const key = card.dataset.subsection;
+      if (currentSettings.subSections[key] === false) card.classList.add('disabled');
+      else card.classList.remove('disabled');
+    });
+  }
+
+  window.handleSectionClick = function(key, page) {
+    if (currentSettings.sections[key] === false) {
+      showToast('⛔ هذا القسم معطل حالياً', 'error');
+      return;
+    }
+    if (page) showPage(page);
+  };
+
+  window.handleSubsectionClick = function(key) {
+    if (currentSettings.subSections[key] === false) {
+      showToast('⛔ هذا القسم معطل حالياً', 'error');
+      return;
+    }
+    showPage(key);
+  };
+
+  let logoClicks = 0, logoTimer = null;
+  document.getElementById('logoEl').addEventListener('click', () => {
+    logoClicks++;
+    clearTimeout(logoTimer);
+    logoTimer = setTimeout(() => logoClicks = 0, 2000);
+    if (logoClicks >= 7) {
+      logoClicks = 0;
+      window.open('admin.html', '_blank');
+    }
+  });
+
+  window.openModal = function() {
+    document.getElementById('loginModal').classList.add('show');
+    document.body.style.overflow = 'hidden';
+  };
+  window.closeModal = function() {
     document.getElementById('loginModal').classList.remove('show');
     document.body.style.overflow = '';
     hideAlert();
     document.getElementById('authForm').reset();
-  }
-
-  function toggleAuthMode() {
+  };
+  window.toggleAuthMode = function() {
     isLoginMode = !isLoginMode;
-    updateModalMode();
-    hideAlert();
-  }
-
-  function updateModalMode() {
-    document.getElementById('modalTitle').textContent = isLoginMode ? 'تسجيل الدخول' : 'إنشاء حساب جديد';
-    document.getElementById('modalSubtitle').textContent = isLoginMode ? 'مرحباً بعودتك إلى Sufi GAMES' : 'انضم إلى مجتمع Sufi GAMES';
+    document.getElementById('modalTitle').textContent = isLoginMode ? 'تسجيل الدخول' : 'إنشاء حساب';
     document.getElementById('submitText').textContent = isLoginMode ? 'تسجيل الدخول' : 'إنشاء الحساب';
-    document.getElementById('switchText').textContent = isLoginMode ? 'ليس لديك حساب؟' : 'لديك حساب بالفعل؟';
+    document.getElementById('switchText').textContent = isLoginMode ? 'ليس لديك حساب؟' : 'لديك حساب؟';
     document.getElementById('switchLink').textContent = isLoginMode ? 'إنشاء حساب' : 'تسجيل الدخول';
     document.getElementById('nameGroup').style.display = isLoginMode ? 'none' : 'block';
     document.getElementById('forgotLink').style.display = isLoginMode ? 'block' : 'none';
-  }
-
-  document.getElementById('loginModal').addEventListener('click', (e) => {
-    if (e.target.id === 'loginModal') closeModal();
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') { closeModal(); closeEditModal(); }
-  });
-
-  // ========================================================
-  //  AUTH: GOOGLE
-  // ========================================================
-  async function signInWithGoogle() {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    const btn = document.querySelector('.google-btn');
-    const originalHTML = btn.innerHTML;
-    btn.innerHTML = '<span class="spinner"></span> جاري الاتصال...';
-    btn.disabled = true;
-    
-    try {
-      const result = await auth.signInWithPopup(provider);
-      // تسجيل المستخدم في Firestore إذا كان جديداً
-      await ensureUserDocument(result.user);
-      closeModal();
-    } catch (error) {
-      console.error(error);
-      if (error.code === 'auth/popup-closed-by-user') {
-        // المستخدم أغلق النافذة
-      } else if (error.code === 'auth/popup-blocked') {
-        showAlert('تم حظر النافذة المنبثقة. يرجى السماح بالنوافذ المنبثقة لهذا الموقع.', 'error');
-      } else {
-        showAlert(translateError(error.code), 'error');
-      }
-    } finally {
-      btn.innerHTML = originalHTML;
-      btn.disabled = false;
-    }
-  }
-
-  async function ensureUserDocument(user) {
-    const docRef = db.collection('users').doc(user.uid);
-    const doc = await docRef.get();
-    if (!doc.exists) {
-      await docRef.set({
-        email: user.email,
-        displayName: user.displayName || '',
-        role: 'user',
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-      });
-    }
-  }
-
-  // ========================================================
-  //  AUTH: EMAIL
-  // ========================================================
-  async function handleEmailAuth(e) {
-    e.preventDefault();
     hideAlert();
-    
-    const email = document.getElementById('authEmail').value.trim();
-    const password = document.getElementById('authPassword').value;
-    const name = document.getElementById('authName').value.trim();
-    
-    const submitBtn = document.getElementById('submitBtn');
-    const submitText = document.getElementById('submitText');
-    const originalText = submitText.textContent;
-    
-    submitBtn.disabled = true;
-    submitText.innerHTML = '<span class="spinner"></span> جاري المعالجة...';
-    
-    try {
-      if (isLoginMode) {
-        const result = await auth.signInWithEmailAndPassword(email, password);
-        await ensureUserDocument(result.user);
-        closeModal();
-      } else {
-        const result = await auth.createUserWithEmailAndPassword(email, password);
-        if (name) {
-          await result.user.updateProfile({ displayName: name });
-        }
-        await ensureUserDocument(result.user);
-        closeModal();
-      }
-    } catch (error) {
-      console.error(error);
-      showAlert(translateError(error.code), 'error');
-    } finally {
-      submitBtn.disabled = false;
-      submitText.textContent = originalText;
-    }
-  }
+  };
 
-  // ========================================================
-  //  AUTH: FORGOT PASSWORD
-  // ========================================================
-  async function handleForgotPassword() {
-    const email = document.getElementById('authEmail').value.trim();
-    if (!email) {
-      showAlert('يرجى إدخال بريدك الإلكتروني أولاً', 'error');
-      return;
-    }
-    try {
-      await auth.sendPasswordResetEmail(email);
-      showAlert('تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني ✅', 'success');
-    } catch (error) {
-      showAlert(translateError(error.code), 'error');
-    }
-  }
+  document.getElementById('loginModal').addEventListener('click', (e) => { if (e.target.id === 'loginModal') closeModal(); });
 
-  // ========================================================
-  //  AUTH: SIGN OUT
-  // ========================================================
-  async function signOutUser() {
-    try {
-      await auth.signOut();
-      document.getElementById('userDropdown').classList.remove('show');
-    } catch (error) {
-      showToast('حدث خطأ أثناء تسجيل الخروج', 'error');
-    }
-  }
+  window.toggleDropdown = function(e) { e.stopPropagation(); document.getElementById('userDropdown').classList.toggle('show'); };
+  document.addEventListener('click', (e) => { if (!e.target.closest('.user-profile')) document.getElementById('userDropdown').classList.remove('show'); });
 
-  // ========================================================
-  //  DROPDOWN
-  // ========================================================
-  function toggleDropdown(e) {
-    e.stopPropagation();
-    document.getElementById('userDropdown').classList.toggle('show');
-  }
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('.user-profile')) {
-      document.getElementById('userDropdown').classList.remove('show');
-    }
-  });
-
-  // ========================================================
-  //  ALERT & TOAST
-  // ========================================================
-  function showAlert(message, type = 'error') {
-    const alert = document.getElementById('authAlert');
-    alert.textContent = message;
-    alert.className = `alert show ${type}`;
-  }
-
-  function hideAlert() {
-    document.getElementById('authAlert').classList.remove('show');
-  }
-
-  function showToast(message, type = 'success') {
-    const toast = document.getElementById('toast');
-    toast.textContent = message;
-    toast.className = `toast show ${type}`;
-    setTimeout(() => { toast.classList.remove('show'); }, 3000);
-  }
-
-  function translateError(code) {
-    const errors = {
-      'auth/email-already-in-use': 'هذا البريد الإلكتروني مسجل بالفعل',
-      'auth/invalid-email': 'البريد الإلكتروني غير صالح',
-      'auth/weak-password': 'كلمة المرور ضعيفة (6 أحرف على الأقل)',
+  window.showAlert = function(msg, type) { const a = document.getElementById('authAlert'); a.textContent = msg; a.className = `alert show ${type}`; };
+  window.hideAlert = function() { document.getElementById('authAlert').classList.remove('show'); };
+  window.showToast = function(msg, type = 'success') {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = `toast show ${type}`;
+    setTimeout(() => t.classList.remove('show'), 3000);
+  };
+  window.translateError = function(code) {
+    return {
+      'auth/email-already-in-use': 'البريد مسجل بالفعل',
+      'auth/invalid-email': 'بريد غير صالح',
+      'auth/weak-password': 'كلمة مرور ضعيفة',
       'auth/user-not-found': 'المستخدم غير موجود',
-      'auth/wrong-password': 'كلمة المرور غير صحيحة',
-      'auth/invalid-credential': 'بيانات الدخول غير صحيحة',
-      'auth/too-many-requests': 'محاولات كثيرة، حاول لاحقاً',
-      'auth/network-request-failed': 'خطأ في الاتصال بالإنترنت',
-      'auth/user-disabled': 'هذا الحساب معطل',
-      'auth/operation-not-allowed': 'هذه الطريقة غير مفعلة في Firebase'
-    };
-    return errors[code] || 'حدث خطأ، يرجى المحاولة مرة أخرى';
-  }
-
-  // ========================================================
-  //  PAGE NAVIGATION
-  // ========================================================
-  function showPage(pageId) {
-    document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-    const target = document.getElementById('page-' + pageId);
-    if (target) {
-      target.classList.add('active');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      document.querySelector('nav ul')?.classList.remove('active');
-      
-      // تحميل الألعاب عند دخول الصفحات
-      if (['ps5', 'ps4', 'ps2', 'arabic'].includes(pageId)) {
-        loadGamesForPlatform(pageId);
-      }
+      'auth/wrong-password': 'كلمة مرور خاطئة',
+      'auth/invalid-credential': 'بيانات غير صحيحة',
+      'auth/too-many-requests': 'محاولات كثيرة'
+    }[code] || 'حدث خطأ';
+  };
+  window.showPage = function(id) {
+    document.querySelectorAll('.page').forEach(p => { p.classList.remove('active'); p.style.display = 'none'; });
+    const page = document.getElementById('page-' + id);
+    if (page) {
+      page.classList.add('active');
+      page.style.display = 'block';
     }
-  }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.querySelector('nav ul').classList.remove('active');
+  };
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeModal(); closeGameModal(); closeSaveDataModal(); } });
 
-  // ========================================================
-  //  LOAD GAMES FOR PLATFORM
-  // ========================================================
-  async function loadGamesForPlatform(platform) {
-    const container = document.getElementById(`games-${platform}-container`);
-    if (!container) return;
-    
-    container.innerHTML = '<div style="text-align:center;padding:40px;"><span class="spinner"></span> جاري التحميل...</div>';
-    
-    try {
-      const snapshot = await db.collection('games')
-        .where('platform', '==', platform)
-        .orderBy('createdAt', 'desc')
-        .get();
-      
-      if (snapshot.empty) {
-        container.innerHTML = `
-          <div class="empty-state">
-            <div class="empty-state-icon"><svg viewBox="0 0 24 24"><path d="M20 6h-8l-2-2H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm0 12H4V8h16v10z"/></svg></div>
-            <h2>القسم فارغ حالياً</h2>
-            <p>لم يتم إضافة أي ألعاب بعد. قريباً ستنضاف أفضل الألعاب!</p>
-            <button class="notify-btn" onclick="showToast('سنُعلمك عند إضافة ألعاب جديدة!', 'success')">🔔 أعلمني عند الإضافة</button>
-          </div>
-        `;
-        return;
-      }
-      
-      let html = '<div class="games-grid">';
-      snapshot.forEach(doc => {
-        const game = doc.data();
-        html += `
-          <div class="game-card">
-            ${game.imageUrl ? `<img src="${game.imageUrl}" alt="${game.title}" onerror="this.style.display='none'">` : ''}
-            <div class="game-info">
-              <h4>${game.title}</h4>
-              <p>${game.description || ''}</p>
-              ${game.downloadLink ? `<a href="${game.downloadLink}" target="_blank" class="game-download">⬇️ تحميل</a>` : ''}
-            </div>
-            <span class="game-platform">${platform.toUpperCase()}</span>
-          </div>
-        `;
-      });
-      html += '</div>';
-      container.innerHTML = html;
-      
-    } catch (error) {
-      console.error('Error loading games:', error);
-      container.innerHTML = '<div style="text-align:center;padding:40px;color:#ff6b6b;">❌ حدث خطأ في تحميل الألعاب</div>';
-    }
-  }
-
-  // ========================================================
-  //  ADMIN: LOAD DATA
-  // ========================================================
-  async function loadAdminData() {
-    try {
-      // تحميل الألعاب
-      const gamesSnap = await db.collection('games').get();
-      allGames = [];
-      gamesSnap.forEach(doc => {
-        allGames.push({ id: doc.id, ...doc.data() });
-      });
-      
-      // تحميل المستخدمين
-      const usersSnap = await db.collection('users').get();
-      allUsers = [];
-      usersSnap.forEach(doc => {
-        allUsers.push({ id: doc.id, ...doc.data() });
-      });
-      
-      // تحديث الإحصائيات
-      document.getElementById('statGames').textContent = allGames.length;
-      document.getElementById('statUsers').textContent = allUsers.length;
-      document.getElementById('statAdmins').textContent = allUsers.filter(u => u.role === 'admin').length;
-      document.getElementById('gamesCount').textContent = allGames.length;
-      document.getElementById('usersCount').textContent = allUsers.length;
-      
-      // تحديث الجداول
-      renderAdminGames();
-      renderAdminUsers();
-      
-    } catch (error) {
-      console.error('Error loading admin data:', error);
-      showToast('خطأ في تحميل بيانات لوحة التحكم', 'error');
-    }
-  }
-
-  // ========================================================
-  //  ADMIN: RENDER GAMES TABLE
-  // ========================================================
-  function renderAdminGames() {
-    const search = document.getElementById('searchGames').value.toLowerCase();
-    const filter = document.getElementById('filterPlatform').value;
-    
-    let filtered = allGames;
-    if (search) {
-      filtered = filtered.filter(g => g.title?.toLowerCase().includes(search));
-    }
-    if (filter !== 'all') {
-      filtered = filtered.filter(g => g.platform === filter);
-    }
-    
-    const tbody = document.getElementById('gamesTableBody');
-    if (filtered.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;color:#888;padding:30px;">لا توجد ألعاب</td></tr>`;
-      return;
-    }
-    
-    tbody.innerHTML = filtered.map(game => `
-      <tr>
-        <td>${game.imageUrl ? `<img src="${game.imageUrl}" class="game-thumb" onerror="this.style.display='none'">` : '📷'}</td>
-        <td><strong>${game.title || 'بدون اسم'}</strong></td>
-        <td><span style="padding:3px 10px;background:rgba(0,180,255,0.15);border-radius:10px;font-size:12px;">${(game.platform || '').toUpperCase()}</span></td>
-        <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${game.description || ''}</td>
-        <td>
-          <div class="admin-actions">
-            <button class="edit-btn" onclick="openEditGameModal('${game.id}')">✏️ تعديل</button>
-            <button class="delete-btn" onclick="deleteGame('${game.id}')">🗑️ حذف</button>
-          </div>
-        </td>
-      </tr>
-    `).join('');
-  }
-
-  // ========================================================
-  //  ADMIN: RENDER USERS TABLE
-  // ========================================================
-  function renderAdminUsers() {
-    const tbody = document.getElementById('usersTableBody');
-    if (allUsers.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;color:#888;padding:30px;">لا يوجد مستخدمين</td></tr>`;
-      return;
-    }
-    
-    tbody.innerHTML = allUsers.map(user => `
-      <tr>
-        <td>${user.displayName || 'مستخدم'}</td>
-        <td>${user.email || ''}</td>
-        <td><span style="padding:3px 10px;background:${user.role === 'admin' ? 'rgba(138,43,226,0.2)' : 'rgba(0,255,136,0.1)'};border-radius:10px;font-size:12px;color:${user.role === 'admin' ? '#8a2be2' : '#00ff88'};">${user.role === 'admin' ? '👑 مشرف' : '👤 عضو'}</span></td>
-        <td>${user.createdAt ? new Date(user.createdAt.seconds * 1000).toLocaleDateString('ar') : '-'}</td>
-        <td>
-          <div class="admin-actions">
-            ${user.role !== 'admin' ? `<button class="edit-btn" onclick="makeAdmin('${user.id}')">👑 جعل مشرف</button>` : ''}
-            <button class="delete-btn" onclick="removeUser('${user.id}')">🗑️ حذف</button>
-          </div>
-        </td>
-      </tr>
-    `).join('');
-  }
-
-  // ========================================================
-  //  ADMIN: MAKE ADMIN
-  // ========================================================
-  async function makeAdmin(uid) {
-    if (!confirm('هل تريد جعل هذا المستخدم مشرفاً؟')) return;
-    try {
-      await db.collection('users').doc(uid).update({ role: 'admin' });
-      showToast('تم جعل المستخدم مشرفاً ✅', 'success');
-      await loadAdminData();
-    } catch (error) {
-      console.error(error);
-      showToast('حدث خطأ', 'error');
-    }
-  }
-
-  // ========================================================
-  //  ADMIN: REMOVE USER
-  // ========================================================
-  async function removeUser(uid) {
-    if (!confirm('هل أنت متأكد من حذف هذا المستخدم؟')) return;
-    try {
-      await db.collection('users').doc(uid).delete();
-      showToast('تم حذف المستخدم ✅', 'success');
-      await loadAdminData();
-    } catch (error) {
-      console.error(error);
-      showToast('حدث خطأ', 'error');
-    }
-  }
-
-  // ========================================================
-  //  ADMIN: ADD GAME
-  // ========================================================
-  async function handleAddGame(e) {
-    e.preventDefault();
-    const title = document.getElementById('gameTitle').value.trim();
-    const platform = document.getElementById('gamePlatform').value;
-    const imageUrl = document.getElementById('gameImage').value.trim();
-    const downloadLink = document.getElementById('gameDownload').value.trim();
-    const description = document.getElementById('gameDescription').value.trim();
-    
-    if (!title || !platform || !imageUrl || !downloadLink || !description) {
-      showToast('يرجى ملء جميع الحقول', 'error');
-      return;
-    }
-    
-    try {
-      await db.collection('games').add({
-        title,
-        platform,
-        imageUrl,
-        downloadLink,
-        description,
-        addedBy: auth.currentUser?.uid || 'unknown',
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-      });
-      
-      showToast('تم إضافة اللعبة بنجاح! 🎉', 'success');
-      document.getElementById('addGameForm').reset();
-      document.getElementById('imagePreview').innerHTML = '';
-      await loadAdminData();
-      switchAdminTab('games');
-      
-    } catch (error) {
-      console.error(error);
-      showToast('حدث خطأ في إضافة اللعبة', 'error');
-    }
-  }
-
-  // ========================================================
-  //  ADMIN: EDIT GAME
-  // ========================================================
-  async function openEditGameModal(gameId) {
-    const game = allGames.find(g => g.id === gameId);
-    if (!game) {
-      showToast('اللعبة غير موجودة', 'error');
-      return;
-    }
-    
-    document.getElementById('editGameId').value = gameId;
-    document.getElementById('editGameTitle').value = game.title || '';
-    document.getElementById('editGamePlatform').value = game.platform || 'ps5';
-    document.getElementById('editGameImage').value = game.imageUrl || '';
-    document.getElementById('editGameDownload').value = game.downloadLink || '';
-    document.getElementById('editGameDescription').value = game.description || '';
-    
-    document.getElementById('editGameModal').classList.add('show');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeEditModal() {
-    document.getElementById('editGameModal').classList.remove('show');
-    document.body.style.overflow = '';
-  }
-
-  async function handleEditGame(e) {
-    e.preventDefault();
-    const gameId = document.getElementById('editGameId').value;
-    const title = document.getElementById('editGameTitle').value.trim();
-    const platform = document.getElementById('editGamePlatform').value;
-    const imageUrl = document.getElementById('editGameImage').value.trim();
-    const downloadLink = document.getElementById('editGameDownload').value.trim();
-    const description = document.getElementById('editGameDescription').value.trim();
-    
-    if (!title || !platform || !imageUrl || !downloadLink || !description) {
-      showToast('يرجى ملء جميع الحقول', 'error');
-      return;
-    }
-    
-    try {
-      await db.collection('games').doc(gameId).update({
-        title,
-        platform,
-        imageUrl,
-        downloadLink,
-        description,
-        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-      });
-      
-      showToast('تم تحديث اللعبة بنجاح! ✅', 'success');
-      closeEditModal();
-      await loadAdminData();
-      
-    } catch (error) {
-      console.error(error);
-      showToast('حدث خطأ في التحديث', 'error');
-    }
-  }
-
-  // ========================================================
-  //  ADMIN: DELETE GAME
-  // ========================================================
-  async function deleteGame(gameId) {
-    if (!confirm('هل أنت متأكد من حذف هذه اللعبة؟')) return;
-    try {
-      await db.collection('games').doc(gameId).delete();
-      showToast('تم حذف اللعبة ✅', 'success');
-      await loadAdminData();
-    } catch (error) {
-      console.error(error);
-      showToast('حدث خطأ في الحذف', 'error');
-    }
-  }
-
-  async function deleteGameFromModal() {
-    const gameId = document.getElementById('editGameId').value;
-    closeEditModal();
-    await deleteGame(gameId);
-  }
-
-  // ========================================================
-  //  ADMIN: SWITCH TABS
-  // ========================================================
-  function switchAdminTab(tab) {
-    document.querySelectorAll('.admin-tab').forEach(t => t.style.display = 'none');
-    document.querySelectorAll('.admin-menu li').forEach(li => li.classList.remove('active'));
-    
-    const target = document.getElementById(`admin-${tab}`);
-    if (target) target.style.display = 'block';
-    
-    const menuItem = document.querySelector(`.admin-menu li[data-tab="${tab}"]`);
-    if (menuItem) menuItem.classList.add('active');
-  }
-
-  // ========================================================
-  //  IMAGE PREVIEW
-  // ========================================================
-  document.getElementById('gameImage')?.addEventListener('input', function() {
-    const preview = document.getElementById('imagePreview');
-    const url = this.value.trim();
-    if (url) {
-      preview.innerHTML = `<img src="${url}" onerror="this.style.display='none'">`;
-    } else {
-      preview.innerHTML = '';
-    }
-  });
-
-  // ========================================================
-  //  OPEN ADD GAME MODAL (توجيه لتبويب الإضافة)
-  // ========================================================
-  function openAddGameModal() {
-    switchAdminTab('add');
-    document.getElementById('addGameForm').reset();
-    document.getElementById('imagePreview').innerHTML = '';
-  }
-
-  // ========================================================
-  //  LOAD GAMES ON PAGE LOAD
-  // ========================================================
-  // تحميل الألعاب عند فتح الصفحات الرئيسية
-  document.addEventListener('DOMContentLoaded', () => {
-    // إذا كان المستخدم مسجل، نتحقق من صلاحيته
-    if (auth.currentUser) {
-      checkUserRole(auth.currentUser);
-    }
-  });
-
-  // ========================================================
-  //  إضافة مستخدمين وهميين (للاختبار)
-  // ========================================================
-  // يمكن إزالة هذا الجزء بعد إضافة المستخدمين الحقيقيين
-  // window.demoAddAdmin = async function() {
-  //   // لا تستخدم هذا في الإنتاج!
-  //   console.log('استخدم Firebase Console لإضافة المشرفين');
-  // };
+  // ===== Init =====
+  renderArabicGames();
+  renderSaveData();
+  applySettings();
 </script>
 
 </body>
