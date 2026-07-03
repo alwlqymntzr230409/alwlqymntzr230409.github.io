@@ -1640,27 +1640,48 @@
   //  CHECK USER ROLE
   // ========================================================
   async function checkUserRole(user) {
-    try {
-      const doc = await db.collection('users').doc(user.uid).get();
-      if (doc.exists && doc.data().role === 'admin') {
-        currentUserRole = 'admin';
-      } else {
-        currentUserRole = 'user';
-        // إذا لم يكن للمستخدم دور، نعطيه دور user
-        if (!doc.exists) {
-          await db.collection('users').doc(user.uid).set({
-            email: user.email,
-            displayName: user.displayName || '',
-            role: 'user',
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-          });
-        }
+  try {
+    const doc = await db.collection('users').doc(user.uid).get();
+    
+    if (doc.exists) {
+      // المستخدم موجود - خذ دوره من Firestore
+      currentUserRole = doc.data().role || 'user';
+      console.log('✅ دور المستخدم:', currentUserRole);
+      
+      // إذا كان المشرف، أظهر رابط لوحة التحكم
+      if (currentUserRole === 'admin') {
+        document.getElementById('admin-link').style.display = 'block';
       }
-    } catch (error) {
-      console.error('Error checking role:', error);
+    } else {
+      // مستخدم جديد - أنشئه مع دور user
       currentUserRole = 'user';
+      await db.collection('users').doc(user.uid).set({
+        email: user.email,
+        displayName: user.displayName || '',
+        role: 'user',
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      console.log('✅ تم إنشاء مستخدم جديد مع دور user');
     }
+  } catch (error) {
+    console.error('❌ خطأ في التحقق من الصلاحية:', error);
+    currentUserRole = 'user';
   }
+  
+  // تحديث واجهة المستخدم
+  updateAdminLink();
+}
+
+// دالة لإظهار/إخفاء رابط لوحة التحكم
+function updateAdminLink() {
+  const adminLink = document.getElementById('admin-link');
+  if (currentUserRole === 'admin') {
+    adminLink.style.display = 'block';
+    console.log('✅ لوحة التحكم مفعلة');
+  } else {
+    adminLink.style.display = 'none';
+  }
+}
 
   // ========================================================
   //  UI UPDATES
